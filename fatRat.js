@@ -1,3 +1,8 @@
+function setup() {
+  const canvas = createCanvas(600, 800);
+  frameRate(30);
+}
+
 // StartScreen
 background(135, 206, 250);
 noStroke();
