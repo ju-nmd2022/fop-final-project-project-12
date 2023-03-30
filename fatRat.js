@@ -1,22 +1,26 @@
 function setup() {
-  const canvas = createCanvas(600, 800);
+  const canvas = createCanvas(1000, 700);
   frameRate(30);
+  canvas.parent("canvas");
 }
 
 // StartScreen
-background(135, 206, 250);
-noStroke();
-fatRat(300, 150, 0.7);
-fill(255, 255, 255);
-textSize(20);
-text("Help your cat to find this fat rat", 30, 30);
+function draw() {
+  background(135, 206, 250);
+  noStroke();
+  fatRat(300, 150, 0.7);
 
-triangle(90, 455, 110, 465, 110, 445);
-triangle(210, 445, 210, 465, 230, 455);
-rect(60, 500, 200, 30);
+  fill(255, 255, 255);
+  textSize(20);
+  text("Help your cat to find this fat rat", 30, 30);
 
-fill(0, 0, 0);
-text("Jump", 100, 530);
+  triangle(90, 455, 110, 465, 110, 445);
+  triangle(210, 445, 210, 465, 230, 455);
+  rect(60, 500, 200, 30);
+
+  fill(0, 0, 0);
+  text("Jump", 100, 530);
+}
 
 function fatRat(x, y, s) {
   push();
