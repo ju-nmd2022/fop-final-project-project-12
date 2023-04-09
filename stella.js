@@ -1,9 +1,21 @@
 noStroke();
 background(150, 150, 150);
 
-fill(200, 200, 200);
+//Body
+
+fill(190, 190, 190);
+rect(95, 119, 10);
+triangle(105, 120, 111, 125, 105, 125);
+rect(95, 123, 70, 25, 8);
+rect(160, 132, 7);
+
+beginShape();
+vertex(165, 140);
+bezierVertex(197, 110, 180, 104, 178, 106);
+endShape();
 
 //Face
+fill(200, 200, 200);
 ellipse(100, 100, 40, 30);
 ellipse(100, 105, 30);
 
@@ -46,17 +58,29 @@ push();
 fill(106, 136, 168);
 translate(109, 101);
 angleMode(DEGREES);
-rotate(-15);
+rotate(165);
 ellipse(0, 0, 8, 6);
 fill(0, 0, 0);
 ellipse(0, 0, 4, 5);
 pop();
 
 //Nose
+triangle(97, 108, 103, 108, 100, 113);
 
 //Mouth
+stroke(180, 180, 180);
+strokeWeight(0.5);
+noFill();
 
-//Body
+line(100, 114, 100, 116);
+arc(95, 110, 20, 15, 15, 50, OPEN);
+
+push();
+angleMode(DEGREES);
+translate(95, 110);
+rotate(180);
+arc(0, 0, 20, 15, 15, 50, OPEN);
+pop();
 
 //Legs
 
