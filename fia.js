@@ -1,11 +1,11 @@
-function sittingTellus(x, y, s) {
+function sittingFia(x, y, s) {
   push();
   translate(x, y);
   scale(s);
   noStroke();
 
   //Tail
-  fill(150, 75, 0);
+  fill(225, 198, 153);
 
   beginShape();
   vertex(120, 160);
@@ -13,12 +13,12 @@ function sittingTellus(x, y, s) {
   endShape();
 
   //Body
-  fill(160, 80, 0);
+  fill(225, 198, 153);
   rect(82.5, 110, 35, 70, 20);
   ellipse(100, 155, 40, 50);
 
   //Legs
-  stroke(140, 55, 20);
+  stroke(169, 149, 123);
   strokeWeight(1);
   line(88, 150, 90, 177);
   line(93, 150, 95, 177);
@@ -27,13 +27,13 @@ function sittingTellus(x, y, s) {
   line(112, 150, 110, 177);
 
   //Paws
-  fill(150, 70, 0);
+  fill(225, 198, 153);
   noStroke();
   ellipse(93, 177, 10, 7);
   ellipse(107, 177, 10, 7);
 
   //Face
-  fill(150, 75, 0);
+  fill(225, 198, 153);
   ellipse(100, 100, 40, 30);
   ellipse(100, 105, 30);
 
@@ -49,7 +49,7 @@ function sittingTellus(x, y, s) {
   endShape();
 
   //Pink inside of ears
-  fill(140, 55, 20);
+  fill(230, 180, 193);
   beginShape();
   vertex(85, 93);
   bezierVertex(80, 75, 90, 88, 90, 90);
@@ -67,7 +67,7 @@ function sittingTellus(x, y, s) {
   angleMode(DEGREES);
   rotate(15);
   ellipse(0, 0, 8, 6);
-  fill(106, 136, 168);
+  fill(251, 177, 23);
   ellipse(0, 0, 4, 5);
   pop();
 
@@ -78,12 +78,12 @@ function sittingTellus(x, y, s) {
   angleMode(DEGREES);
   rotate(165);
   ellipse(0, 0, 8, 6);
-  fill(106, 136, 168);
+  fill(251, 177, 23);
   ellipse(0, 0, 4, 5);
   pop();
 
   //Nose
-  fill(180, 180, 180);
+  fill(230, 180, 193);
   triangle(97, 108, 103, 108, 100, 113);
 
   //Mouth
@@ -112,7 +112,7 @@ function sittingTellus(x, y, s) {
   pop();
 }
 
-function standingStella(x, y, s) {
+function standingFia(x, y, s) {
   push();
   translate(x, y);
   scale(s);
@@ -120,11 +120,11 @@ function standingStella(x, y, s) {
   background(250, 250, 250);
 
   //Head
-  fill(150, 75, 0);
+  fill(225, 198, 153);
   ellipse(100, 100, 20, 30);
 
   //Ear
-  fill(150, 75, 0);
+  fill(225, 198, 153);
   beginShape();
   vertex(95, 88);
   bezierVertex(105, 70, 105, 80, 105, 88);
@@ -137,23 +137,23 @@ function standingStella(x, y, s) {
   endShape();
 
   //Nose
-  fill(200, 200, 200);
+  fill(221, 171, 155);
   triangle(108, 100, 108, 107, 112, 107);
 
   //Eye
-  fill(0, 0, 0);
-  ellipse(107, 98, 5, 6);
   fill(106, 136, 168);
+  ellipse(107, 98, 5, 6);
+  fill(0, 0, 0);
   ellipse(107, 98, 2, 6);
 
   //Tail
-  fill(150, 75, 0);
+  fill(225, 198, 153);
   stroke(200, 200, 200);
 
   curve(100, 90, 50, 122, 30, 100, 60, 140);
   noStroke();
   //Body
-  fill(150, 75, 0);
+  fill(225, 198, 153);
   rect(45, 110, 50, 25, 10);
 
   //Neck
@@ -172,7 +172,7 @@ function standingStella(x, y, s) {
 
   //Paws
   noStroke();
-  fill(150, 75, 0);
+  fill(225, 198, 153);
   ellipse(60, 150, 12, 6);
   ellipse(86, 150, 12, 6);
 

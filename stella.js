@@ -157,11 +157,7 @@ function standingStella(x, y, s) {
   rect(45, 110, 50, 25, 10);
 
   //Neck
-  push();
-  translate(90, 104);
-  rotate(95);
-  rect(0, 0, 12, 25);
-  pop();
+  rect(87, 103, 10, 15, 40);
 
   //Legs
   stroke(180, 180, 180);
