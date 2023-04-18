@@ -1,3 +1,4 @@
+
 noStroke();
 background(135, 206, 250);
 
@@ -48,3 +49,4 @@ function clouds(x, y, s) {
   ellipse(165, 80, 70, 50);
   ellipse(130, 80, 60, 40);
 }
+
