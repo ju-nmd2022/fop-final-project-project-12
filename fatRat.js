@@ -640,7 +640,7 @@ function standingStella(x, y, s) {
 }
 
 // Varaiables
-const JUMP_HEIGHT = 20;
+const JUMP_HEIGHT = 16;
 const CAT_SPEED = 3;
 const CAT_HEIGHT = 120;
 
@@ -657,6 +657,7 @@ let characterButtonIsClicked = false;
 
 // Screens
 function startScreen() {
+  state = "start";
   background(135, 206, 250);
   noStroke();
 
@@ -710,6 +711,7 @@ function startScreen() {
 }
 
 function characterScreen() {
+  state = "choose";
   background(135, 206, 250);
   noStroke();
 
@@ -736,6 +738,7 @@ function characterScreen() {
 }
 
 function gameScreen() {
+  state = "game";
   noStroke();
   background(135, 206, 250);
 
@@ -778,6 +781,15 @@ function gameScreen() {
 
   standingFia(catX, catY, 0.8);
   isCatWithin(-200, 1000, 600, 700);
+  isCatWithin(0, 100, 510, 530);
+  isCatWithin(110, 210, 480, 500);
+  isCatWithin(200, 300, 430, 450);
+  isCatWithin(320, 420, 510, 530);
+  isCatWithin(400, 500, 400, 420);
+  isCatWithin(480, 580, 510, 530);
+  isCatWithin(600, 700, 360, 380);
+  isCatWithin(680, 780, 480, 500);
+  isCatWithin(800, 900, 450, 470);
 
   if (keyIsDown(RIGHT_ARROW)) {
     speedX = CAT_SPEED;
@@ -808,8 +820,8 @@ function draw() {
   // if (state === "start") {
   //   startScreen();
   // } else if (state === "choose") {
-  //   charcterScreen();
-  // } else if (state === "start") {
+  //   characterScreen();
+  // } else if (state === "game") {
   //   gameScreen();
   // }
   gameScreen();
