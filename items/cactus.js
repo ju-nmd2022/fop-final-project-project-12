@@ -33,3 +33,5 @@ function cactus(x, y, s) {
   ellipse(230, 370, 3, 7);
   pop();
 }
+
+export { cactus };

@@ -17,4 +17,4 @@ function fish(x, y, s) {
   pop();
 }
 
-function mice() {}
+export { fish };
