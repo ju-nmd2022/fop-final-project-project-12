@@ -117,7 +117,6 @@ export function standingFia(catX, catY, s) {
   translate(catX, catY);
   scale(s);
   noStroke();
-  background(250, 250, 250);
 
   //Head
   fill(225, 198, 153);
@@ -182,4 +181,5 @@ export function standingFia(catX, catY, s) {
   line(107, 106, 104, 106);
   line(107, 107, 104, 108);
   line(107, 105, 104, 104);
+  pop();
 }
