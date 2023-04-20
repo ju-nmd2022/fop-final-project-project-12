@@ -722,20 +722,20 @@ function characterScreen() {
 
   clouds();
   clouds(600, 90, 1);
-  clouds(-200, -100, 0.7);
+  clouds(250, 100, 0.7);
 
-  sittingFia(-450, 450, 2.5);
-  sittingTellus(-80, 450, 2.5);
-  sittingStella(250, 450, 2.5);
+  sittingFia(100, 260, 2);
+  sittingTellus(300, 260, 2);
+  sittingStella(500, 260, 2);
 
   fill(80, 80, 80);
   textSize(50);
-  text("CHOOSE YOUR CHARACTER!!", -220, 350);
+  text("CHOOSE YOUR CHARACTER!!", 160, 200);
 
   textSize(20);
-  text("Fia", -215, 600);
-  text("Tellus", 145, 600);
-  text("Stella", 455, 600);
+  text("Fia", 280, 400);
+  text("Tellus", 470, 400);
+  text("Stella", 670, 400);
 }
 
 function gameScreen() {
