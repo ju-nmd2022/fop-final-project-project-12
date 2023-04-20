@@ -706,7 +706,8 @@ function startScreen() {
     mouseY < 400 + 50 &&
     state === "start"
   ) {
-    state === "choose";
+
+    state = "choose";
   }
 }
 
@@ -815,14 +816,13 @@ function isCatWithin(x1, x2, y1, y2, callback) {
     } else callback();
   }
 }
-
+ 
 function draw() {
-  // if (state === "start") {
-  //   startScreen();
-  // } else if (state === "choose") {
-  //   characterScreen();
-  // } else if (state === "game") {
-  //   gameScreen();
-  // }
-  gameScreen();
+  if (state === "start") {
+    startScreen();
+  } else if (state === "choose") {
+    characterScreen();
+  } else if (state === "game") {
+    gameScreen();
+  }
 }
