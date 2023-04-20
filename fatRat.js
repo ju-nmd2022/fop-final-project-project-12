@@ -5,6 +5,7 @@ function setup() {
 }
 
 function clouds(x, y, s) {
+  push();
   translate(x, y);
   scale(s);
   fill(255, 255, 255);
@@ -16,6 +17,7 @@ function clouds(x, y, s) {
   ellipse(220, 100, 90, 70);
   ellipse(165, 80, 70, 50);
   ellipse(130, 80, 60, 40);
+  pop();
 }
 
 function fatRat(x, y, s) {
@@ -638,13 +640,17 @@ function standingStella(x, y, s) {
 }
 
 // Varaiables
+const JUMP_HEIGHT = 20;
+const CAT_SPEED = 3;
+const CAT_HEIGHT = 120;
+
 let speedX = 0;
-let jump = 0;
+let speedY = 0;
+let gravity = 1;
 
-let gravity = 0;
-
-let catX = -600;
-let catY = 720;
+let catX = -20;
+let catY = 600 - CAT_HEIGHT;
+let catIsOnGround = false;
 
 let state = "start";
 let characterButtonIsClicked = false;
@@ -660,7 +666,7 @@ function startScreen() {
 
   clouds();
   clouds(600, 90, 1);
-  clouds(-200, -100, 0.7);
+  clouds(250, 100, 0.7);
 
   fatRat(200, 520);
 
@@ -767,23 +773,47 @@ function gameScreen() {
   // Displaying clouds in the sky
   clouds();
   clouds(600, 90, 1);
-  clouds(-200, -100, 0.7);
+  clouds(250, 100, 0.7);
 
+  speedY += gravity;
   catX = catX + speedX;
-  catY = catY + jump + gravity;
+  catY = catY + speedY;
 
   standingFia(catX, catY, 1);
 
   if (keyIsDown(RIGHT_ARROW)) {
-    speedX = 3;
+    speedX = CAT_SPEED;
   } else if (keyIsDown(LEFT_ARROW)) {
-    speedX = -3;
-  } else if (keyIsDown(32)) {
-    jump = -40;
-  } else {
-    speedX = 0;
-    jump = 0;
-    gravity = 0;
+    speedX = -CAT_SPEED;
+  }
+
+  if (keyIsDown(32) && catIsOnGround) {
+    speedY -= JUMP_HEIGHT;
+    catIsOnGround = false;
+  }
+}
+
+isCatWithin(-200, 1000, 600, 700);
+standingFia(catX, catY, 0.8);
+
+//function isCatWithin(x1, x2, y1, y2) {
+//   let newCatY = catY - 120;
+//   if (catX >= x1 && catX <= x2 && newCatY >= y1 && newCatY <= y2) {
+//     catY = y1 + 120;
+//     catIsOnGround = true;
+//     speedY = 0;
+//   }
+// }
+
+function isCatWithin(x1, x2, y1, y2, callback) {
+  let newCatY = catY + CAT_HEIGHT;
+  console.log(newCatY);
+  if (catX >= x1 && catX <= x2 && newCatY >= y1 && newCatY <= y2) {
+    if (callback == null) {
+      catY = y1 - CAT_HEIGHT;
+      catIsOnGround = true;
+      speedY = 0;
+    } else callback();
   }
 }
 
