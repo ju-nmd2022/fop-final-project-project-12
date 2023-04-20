@@ -668,17 +668,17 @@ function startScreen() {
   clouds(600, 90, 1);
   clouds(250, 100, 0.7);
 
-  fatRat(200, 520);
+  fatRat(500, 250);
 
   // Instructions
   fill(80, 80, 80);
-  textSize(45);
-  text("There is a fat rat lost in the jungle of cat-trees", -300, 250);
-  text("and we need your help to find him!! Can you help us?", -350, 300);
+  textSize(30);
+  text("There is a fat rat lost in the jungle of cat-trees", 150, 250);
+  text("and we need your help to find him!! Can you help us?", 150, 300);
 
   fill(255, 255, 255);
-  textSize(30);
-  text("How to play:", -550, 500);
+  textSize(20);
+  text("How to play:", 40, 400);
 
   triangle(90, 455, 110, 465, 110, 445);
   triangle(210, 445, 210, 465, 230, 455);
@@ -695,20 +695,17 @@ function startScreen() {
     text("Choose your character!", x + 50, y + 30);
   }
 
-  characterButton(0, 550, 300, 50);
+  characterButton(350, 400, 300, 50);
 
-  function mousePressed() {
-    if (state === "start") {
-      if (
-        mouseX > 500 &&
-        mouseX < 500 + 300 &&
-        mouseY > 550 &&
-        mouseY < 550 + 50
-      ) {
-        characterButtonIsClicked = true;
-        state = "choose";
-      }
-    }
+  if (
+    mouseIsPressed &&
+    mouseX > 350 &&
+    mouseX < 350 + 300 &&
+    mouseY > 400 &&
+    mouseY < 400 + 50 &&
+    state === "start"
+  ) {
+    state === "choose";
   }
 }
 
@@ -779,12 +776,15 @@ function gameScreen() {
   catX = catX + speedX;
   catY = catY + speedY;
 
-  standingFia(catX, catY, 1);
+  standingFia(catX, catY, 0.8);
+  isCatWithin(-200, 1000, 600, 700);
 
   if (keyIsDown(RIGHT_ARROW)) {
     speedX = CAT_SPEED;
   } else if (keyIsDown(LEFT_ARROW)) {
     speedX = -CAT_SPEED;
+  } else {
+    speedX = 0;
   }
 
   if (keyIsDown(32) && catIsOnGround) {
@@ -793,21 +793,8 @@ function gameScreen() {
   }
 }
 
-isCatWithin(-200, 1000, 600, 700);
-standingFia(catX, catY, 0.8);
-
-//function isCatWithin(x1, x2, y1, y2) {
-//   let newCatY = catY - 120;
-//   if (catX >= x1 && catX <= x2 && newCatY >= y1 && newCatY <= y2) {
-//     catY = y1 + 120;
-//     catIsOnGround = true;
-//     speedY = 0;
-//   }
-// }
-
 function isCatWithin(x1, x2, y1, y2, callback) {
   let newCatY = catY + CAT_HEIGHT;
-  console.log(newCatY);
   if (catX >= x1 && catX <= x2 && newCatY >= y1 && newCatY <= y2) {
     if (callback == null) {
       catY = y1 - CAT_HEIGHT;
@@ -825,5 +812,5 @@ function draw() {
   // } else if (state === "start") {
   //   gameScreen();
   // }
-  characterScreen();
+  gameScreen();
 }
