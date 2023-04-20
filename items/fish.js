@@ -1,4 +1,4 @@
-function fish(x, y, s) {
+export function fish(x, y, s) {
   push();
   translate(x, y);
   scale(s);
@@ -16,5 +16,3 @@ function fish(x, y, s) {
   ellipse(185, 199, 1.5);
   pop();
 }
-
-export { fish };

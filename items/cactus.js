@@ -1,4 +1,4 @@
-function cactus(x, y, s) {
+export function cactus(x, y, s) {
   push();
   translate(x, y);
   scale(s);
@@ -33,5 +33,3 @@ function cactus(x, y, s) {
   ellipse(230, 370, 3, 7);
   pop();
 }
-
-export { cactus };

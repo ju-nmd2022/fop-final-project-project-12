@@ -1,17 +1,14 @@
-import * as sittingTellus from "./characters/tellusSitting";
-import * as standingTellus from "./characters/tellusStanding";
-
-import * as sittingStella from "./characters/stellaSitting";
-import * as standingStella from "./characters/stellaStanding";
-
-import * as sittingFia from "./characters/fiaSitting";
-import * as standingFia from "./characters/fiaStanding";
-
-function setup() {
+window.setup = () => {
   const canvas = createCanvas(1000, 700);
   frameRate(30);
   canvas.parent("canvas");
-}
+};
+
+import { standingTellus, sittingTellus } from "./characters/tellus.js";
+import { standingStella, sittingStella } from "./characters/stella.js";
+import { standingFia, sittingFia } from "./characters/fia.js";
+import { cactus } from "./items/cactus.js";
+import { fish } from "./items/fish.js";
 
 function clouds(x, y, s) {
   push();
@@ -160,7 +157,6 @@ function startScreen() {
     mouseY < 400 + 50 &&
     state === "start"
   ) {
-
     state = "choose";
   }
 }
@@ -270,8 +266,8 @@ function isCatWithin(x1, x2, y1, y2, callback) {
     } else callback();
   }
 }
- 
-function draw() {
+
+window.draw = () => {
   if (state === "start") {
     startScreen();
   } else if (state === "choose") {
@@ -279,4 +275,4 @@ function draw() {
   } else if (state === "game") {
     gameScreen();
   }
-}
+};

@@ -1,11 +1,11 @@
-function sittingStella(catX, catY, s) {
+export function sittingFia(catX, catY, s) {
   push();
   translate(catX, catY);
   scale(s);
   noStroke();
 
   //Tail
-  fill(180, 180, 180);
+  fill(225, 198, 153);
 
   beginShape();
   vertex(120, 160);
@@ -13,12 +13,12 @@ function sittingStella(catX, catY, s) {
   endShape();
 
   //Body
-  fill(190, 190, 190);
+  fill(225, 198, 153);
   rect(82.5, 110, 35, 70, 20);
   ellipse(100, 155, 40, 50);
 
   //Legs
-  stroke(170, 170, 170);
+  stroke(169, 149, 123);
   strokeWeight(1);
   line(88, 150, 90, 177);
   line(93, 150, 95, 177);
@@ -27,13 +27,13 @@ function sittingStella(catX, catY, s) {
   line(112, 150, 110, 177);
 
   //Paws
-  fill(180, 180, 180);
+  fill(225, 198, 153);
   noStroke();
   ellipse(93, 177, 10, 7);
   ellipse(107, 177, 10, 7);
 
   //Face
-  fill(200, 200, 200);
+  fill(225, 198, 153);
   ellipse(100, 100, 40, 30);
   ellipse(100, 105, 30);
 
@@ -49,7 +49,7 @@ function sittingStella(catX, catY, s) {
   endShape();
 
   //Pink inside of ears
-  fill(221, 171, 155);
+  fill(230, 180, 193);
   beginShape();
   vertex(85, 93);
   bezierVertex(80, 75, 90, 88, 90, 90);
@@ -62,7 +62,7 @@ function sittingStella(catX, catY, s) {
 
   //Left eye
   push();
-  fill(106, 136, 168);
+  fill(251, 177, 23);
   translate(91, 101);
   angleMode(DEGREES);
   rotate(15);
@@ -73,7 +73,7 @@ function sittingStella(catX, catY, s) {
 
   //Right eye
   push();
-  fill(106, 136, 168);
+  fill(251, 177, 23);
   translate(109, 101);
   angleMode(DEGREES);
   rotate(165);
@@ -83,7 +83,7 @@ function sittingStella(catX, catY, s) {
   pop();
 
   //Nose
-  fill(180, 180, 180);
+  fill(230, 180, 193);
   triangle(97, 108, 103, 108, 100, 113);
 
   //Mouth
@@ -112,4 +112,74 @@ function sittingStella(catX, catY, s) {
   pop();
 }
 
-export { sittingStella };
+export function standingFia(catX, catY, s) {
+  push();
+  translate(catX, catY);
+  scale(s);
+  noStroke();
+  background(250, 250, 250);
+
+  //Head
+  fill(225, 198, 153);
+  ellipse(100, 100, 20, 30);
+
+  //Ear
+  fill(225, 198, 153);
+  beginShape();
+  vertex(95, 88);
+  bezierVertex(105, 70, 105, 80, 105, 88);
+  endShape();
+
+  fill(221, 171, 155);
+  beginShape();
+  vertex(100, 87);
+  bezierVertex(100, 78, 108, 79, 104, 87);
+  endShape();
+
+  //Nose
+  fill(221, 171, 155);
+  triangle(108, 100, 108, 107, 112, 107);
+
+  //Eye
+  fill(106, 136, 168);
+  ellipse(107, 98, 5, 6);
+  fill(0, 0, 0);
+  ellipse(107, 98, 2, 6);
+
+  //Tail
+  fill(225, 198, 153);
+  stroke(200, 200, 200);
+
+  curve(100, 90, 50, 122, 30, 100, 60, 140);
+  noStroke();
+  //Body
+  fill(225, 198, 153);
+  rect(45, 110, 50, 25, 10);
+
+  //Neck
+  rect(87, 103, 10, 15, 40);
+
+  //Legs
+  stroke(180, 180, 180);
+  line(54, 135, 54, 150);
+  line(80, 135, 80, 150);
+  line(64, 135, 64, 150);
+  line(90, 133, 90, 150);
+
+  noStroke();
+  rect(54, 130, 10, 20);
+  rect(80, 130, 10, 20);
+
+  //Paws
+  noStroke();
+  fill(225, 198, 153);
+  ellipse(60, 150, 12, 6);
+  ellipse(86, 150, 12, 6);
+
+  //Whiskers
+  stroke(180, 180, 180);
+  strokeWeight(0.5);
+  line(107, 106, 104, 106);
+  line(107, 107, 104, 108);
+  line(107, 105, 104, 104);
+}
