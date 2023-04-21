@@ -104,6 +104,7 @@ let catY = 600 - CAT_HEIGHT;
 let catIsOnGround = false;
 
 let state = "start";
+let character = null;
 let characterButtonIsClicked = false;
 
 // Screens
@@ -186,6 +187,38 @@ function characterScreen() {
   text("Fia", 280, 400);
   text("Tellus", 470, 400);
   text("Stella", 670, 400);
+
+  if (
+    mouseIsPressed &&
+    mouseX > 250 &&
+    mouseX < 250 + 80 &&
+    mouseY > 400 &&
+    mouseY < 400 + 240 &&
+    state === "choose"
+  ) {
+    character = "fia";
+    state = "game";
+  } else if (
+    mouseIsPressed &&
+    mouseX > 450 &&
+    mouseX < 450 + 80 &&
+    mouseY > 400 &&
+    mouseY < 400 + 240 &&
+    state === "choose"
+  ) {
+    character = "tellus";
+    state = "game";
+  } else if (
+    mouseIsPressed &&
+    mouseX > 650 &&
+    mouseX < 650 + 80 &&
+    mouseY > 400 &&
+    mouseY < 400 + 240 &&
+    state === "choose"
+  ) {
+    character = "stella";
+    state = "game";
+  }
 }
 
 function gameScreen() {
@@ -230,7 +263,6 @@ function gameScreen() {
   catX = catX + speedX;
   catY = catY + speedY;
 
-  standingFia(catX, catY, 0.8);
   isCatWithin(-200, 1000, 600, 700);
   isCatWithin(0, 100, 510, 530);
   isCatWithin(110, 210, 480, 500);
@@ -253,6 +285,23 @@ function gameScreen() {
   if (keyIsDown(32) && catIsOnGround) {
     speedY -= JUMP_HEIGHT;
     catIsOnGround = false;
+  }
+
+  switch (character) {
+    case "fia":
+      standingFia(catX, catY, 0.8);
+      break;
+
+    case "tellus":
+      standingTellus(catX, catY, 0.8);
+      break;
+
+    case "stella":
+      standingStella(catX, catY, 0.8);
+      break;
+
+    default:
+      console.log("no character chosen");
   }
 }
 
