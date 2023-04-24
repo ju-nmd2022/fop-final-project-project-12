@@ -9,6 +9,8 @@ import { standingStella, sittingStella } from "./characters/stella.js";
 import { standingFia, sittingFia } from "./characters/fia.js";
 import { cactus } from "./items/cactus.js";
 import { fish } from "./items/fish.js";
+import { mouse } from "./items/mouse.js";
+import { fatRat } from "./items/rat.js";
 
 function clouds(x, y, s) {
   push();
@@ -23,70 +25,6 @@ function clouds(x, y, s) {
   ellipse(220, 100, 90, 70);
   ellipse(165, 80, 70, 50);
   ellipse(130, 80, 60, 40);
-  pop();
-}
-
-function fatRat(x, y, s) {
-  push();
-  translate(x, y);
-  scale(s);
-
-  //Rat body
-  noStroke();
-  fill(191, 191, 191);
-  ellipse(300, 300, 150, 200);
-
-  beginShape();
-  vertex(229, 275);
-  bezierVertex(280, 150, 320, 150, 371, 275);
-  endShape();
-
-  beginShape();
-  vertex(270, 200);
-  bezierVertex(280, 120, 320, 120, 330, 200);
-  endShape();
-
-  //Rat ears
-  ellipse(280, 145, 20);
-  ellipse(320, 145, 20);
-
-  fill(255, 192, 203);
-  ellipse(280, 145, 8, 10);
-  ellipse(320, 145, 8, 10);
-
-  //Rat nose and mouth
-  ellipse(300, 180, 13);
-
-  fill(255, 240, 190);
-  rect(290, 180, 6);
-  rect(297, 177, 6);
-
-  fill(191, 191, 191);
-  triangle(290, 167, 284, 187, 310, 170);
-
-  push();
-  stroke(153, 153, 153);
-  strokeWeight(1.5);
-  line(290, 167, 284, 187);
-  line(284, 187, 310, 170);
-  pop();
-  fill(0, 0, 0);
-  ellipse(286, 185, 5);
-
-  //Rat eyes
-  fill(255, 255, 255);
-  ellipse(290, 160, 7);
-  ellipse(310, 160, 7);
-
-  fill(0, 0, 0);
-  ellipse(290, 160, 3);
-  ellipse(310, 160, 3);
-
-  //Rat arms
-  stroke(0, 0, 0);
-  strokeWeight(3);
-  curve(234, 288, 236, 257, 285, 287, 292, 244);
-
   pop();
 }
 
@@ -253,6 +191,14 @@ function gameScreen() {
   rect(660, 360, 100, 20);
   rect(740, 480, 100, 20);
   rect(860, 450, 100, 20);
+
+  // Item display in corner
+  fish(-150, -170, 1, 100);
+  fish(-100, -170, 1, 100);
+  fish(-50, -170, 1, 100);
+  mouse(-100, -100, 0.8, 100);
+  mouse(-50, -100, 0.8, 100);
+  mouse(0, -100, 0.8, 100);
 
   // Displaying clouds in the sky
   clouds();
