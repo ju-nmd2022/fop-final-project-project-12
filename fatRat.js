@@ -28,67 +28,6 @@ function clouds(x, y, s) {
   pop();
 }
 
-//#region Items
-// let mouseItem1 = {
-//   id: "mouse1",
-//   type: "mouse",
-//   posX: 200,
-//   posY: 200,
-//   hasPickedUp: false,
-// };
-
-// let mouseItem2 = {
-//   id: "mouse2",
-//   type: "mouse",
-//   posX: 200,
-//   posY: 200,
-//   hasPickedUp: false,
-// };
-
-// let mouseItem3 = {
-//   id: "mouse3",
-//   type: "mouse",
-//   posX: 200,
-//   posY: 200,
-//   hasPickedUp: false,
-// };
-
-// let fishItem1 = {
-//   id: "fish1",
-//   type: "fish",
-//   posX: 300,
-//   posY: 400,
-//   hasPickedUp: false,
-// };
-
-// let fishItem2 = {
-//   id: "fish2",
-//   type: "fish",
-//   posX: 300,
-//   posY: 400,
-//   hasPickedUp: false,
-// };
-
-// let fishItem3 = {
-//   id: "fish3",
-//   type: "fish",
-//   posX: 300,
-//   posY: 400,
-//   hasPickedUp: false,
-// };
-//#endregion
-
-// Varaiables
-
-// let mouseAndFishArray = [
-//   mouseItem1,
-//   mouseItem2,
-//   mouseItem3,
-//   fishItem1,
-//   fishItem2,
-//   fishItem3,
-// ];
-
 const JUMP_HEIGHT = 16;
 const CAT_SPEED = 3;
 const CAT_HEIGHT = 120;
@@ -255,21 +194,9 @@ function gameScreen() {
   fish(-150, -170, 1, 100);
   fish(-100, -170, 1, 100);
   fish(-50, -170, 1, 100);
-  // mouse(-100, -100, 0.8, 100);
+  mouse(-100, -100, 0.8, 100);
   mouse(-50, -100, 0.8, 100);
   mouse(0, -100, 0.8, 100);
-
-  // function placeMouseAndFishOnScreen() {
-  //   mouseAndFishArray.forEach((item) => {
-  //     if (item.hasPickedUp) {
-  //       if (item.type === "mouse") {
-  //         mouse(-100, -100, 0.8);
-  //       } else {
-  //         mouse(-100, -100, 0.8, 100);
-  //       }
-  //     }
-  //   });
-  // }
 }
 
 // Displaying clouds in the sky
