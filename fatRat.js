@@ -28,6 +28,66 @@ function clouds(x, y, s) {
   pop();
 }
 
+//#region Item objects
+let mouseItem1 = {
+  id: "mouse1",
+  type: "mouse",
+  posX: -50,
+  posY: 340,
+  hasPickedUp: false,
+};
+
+let mouseItem2 = {
+  id: "mouse2",
+  type: "mouse",
+  posX: 100,
+  posY: 306,
+  hasPickedUp: false,
+};
+
+let mouseItem3 = {
+  id: "mouse3",
+  type: "mouse",
+  posX: 200,
+  posY: 200,
+  hasPickedUp: false,
+};
+
+let fishItem1 = {
+  id: "fish1",
+  type: "fish",
+  posX: 300,
+  posY: 400,
+  hasPickedUp: false,
+};
+
+let fishItem2 = {
+  id: "fish2",
+  type: "fish",
+  posX: 200,
+  posY: 400,
+  hasPickedUp: false,
+};
+
+let fishItem3 = {
+  id: "fish3",
+  type: "fish",
+  posX: 100,
+  posY: 400,
+  hasPickedUp: false,
+};
+//#endregion
+
+// Array for items to pick up
+let mouseAndFishArray = [
+  mouseItem1,
+  mouseItem2,
+  mouseItem3,
+  fishItem1,
+  fishItem2,
+  fishItem3,
+];
+
 const JUMP_HEIGHT = 16;
 const CAT_SPEED = 3;
 const CAT_HEIGHT = 120;
@@ -44,6 +104,8 @@ let state = "start";
 let character = null;
 let characterButtonIsClicked = false;
 
+let inventoryItemWidth = 60;
+
 function isCatWithin(x1, x2, y1, y2, callback) {
   let newCatY = catY + CAT_HEIGHT;
   if (catX >= x1 && catX <= x2 && newCatY >= y1 && newCatY <= y2) {
@@ -56,6 +118,53 @@ function isCatWithin(x1, x2, y1, y2, callback) {
 }
 
 window.draw = () => {
+  function opacityMouseAndFish() {
+    mouseAndFishArray.forEach((item, index) => {
+      if (item.hasPickedUp) {
+        if (item.type === "mouse") {
+          mouse(index * 50 - 150, -150, 1, 100);
+        } else if (item.type === "fish") {
+          fish(index * 50 - 150, -150, 1, 100);
+        } else {
+          console.log("invalid item type");
+        }
+      } else {
+        if (item.type === "mouse") {
+          mouse(index * 50 - 150, -150, 1, 50);
+          mouse(item.posX, item.posY, 1, 255);
+          if (item.id === "mouse2") {
+          }
+
+          isCatWithin(
+            item.posX,
+            item.posX + 200,
+            item.posY,
+            item.posY + 200,
+            () => {
+              item.hasPickedUp = true;
+              console.log("hit the mouse");
+            }
+          );
+        } else if (item.type === "fish") {
+          fish(index * 50 - 150, -150, 1, 50);
+          fish(item.posX, item.posY, 1, 255);
+          isCatWithin(
+            item.posX,
+            item.posX + 200,
+            item.posY,
+            item.posY + 200,
+            () => {
+              item.hasPickedUp = true;
+              console.log("hit the fish");
+            }
+          );
+        } else {
+          console.log("invalid item type");
+        }
+      }
+    });
+  }
+
   // Screens
   function startScreen() {
     state = "start";
@@ -204,12 +313,12 @@ window.draw = () => {
     rect(740, 480, 100, 20);
     rect(860, 450, 100, 20);
 
-    fish(-150, -170, 1, 100);
-    fish(-100, -170, 1, 100);
-    fish(-50, -170, 1, 100);
-    mouse(-100, -100, 0.8, 100);
-    mouse(-50, -100, 0.8, 100);
-    mouse(0, -100, 0.8, 100);
+    // fish(-150, -170, 1, 100);
+    // fish(-100, -170, 1, 100);
+    // fish(-50, -170, 1, 100);
+    // mouse(-100, -100, 0.8, 100);
+    // mouse(-50, -100, 0.8, 100);
+    // mouse(0, -100, 0.8, 100);
 
     switch (character) {
       case "fia":
@@ -227,6 +336,8 @@ window.draw = () => {
       default:
         console.log("no character chosen");
     }
+
+    opacityMouseAndFish();
   }
 
   // Displaying clouds in the sky

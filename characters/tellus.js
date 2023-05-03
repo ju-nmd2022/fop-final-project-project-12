@@ -181,4 +181,5 @@ export function standingTellus(catX, catY, s) {
   line(107, 106, 104, 106);
   line(107, 107, 104, 108);
   line(107, 105, 104, 104);
+  pop();
 }
