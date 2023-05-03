@@ -32,8 +32,8 @@ function clouds(x, y, s) {
 let mouseItem1 = {
   id: "mouse1",
   type: "mouse",
-  posX: -50,
-  posY: 340,
+  posX: 0,
+  posY: 0,
   hasPickedUp: false,
 };
 
@@ -56,8 +56,8 @@ let mouseItem3 = {
 let fishItem1 = {
   id: "fish1",
   type: "fish",
-  posX: 300,
-  posY: 400,
+  posX: 0,
+  posY: 0,
   hasPickedUp: false,
 };
 
@@ -90,7 +90,7 @@ let mouseAndFishArray = [
 
 const JUMP_HEIGHT = 16;
 const CAT_SPEED = 3;
-const CAT_HEIGHT = 120;
+const CAT_HEIGHT = 60;
 
 let speedX = 0;
 let speedY = 0;
@@ -117,6 +117,10 @@ function isCatWithin(x1, x2, y1, y2, callback) {
   }
 }
 
+function isHeadWithin(x1, x2, y1, y2, callback) {
+  let newCatY = catY + CAT_HEIGHT;
+}
+
 window.draw = () => {
   function opacityMouseAndFish() {
     mouseAndFishArray.forEach((item, index) => {
@@ -132,35 +136,28 @@ window.draw = () => {
         if (item.type === "mouse") {
           mouse(index * 50 - 150, -150, 1, 50);
           mouse(item.posX, item.posY, 1, 255);
-          if (item.id === "mouse2") {
-          }
 
-          isCatWithin(
-            item.posX,
-            item.posX + 200,
-            item.posY,
-            item.posY + 200,
-            () => {
-              item.hasPickedUp = true;
-              console.log("hit the mouse");
-            }
-          );
+          fill(0, 255, 255);
+          ellipse(item.posX, item.posY, 20);
         } else if (item.type === "fish") {
           fish(index * 50 - 150, -150, 1, 50);
           fish(item.posX, item.posY, 1, 255);
-          isCatWithin(
-            item.posX,
-            item.posX + 200,
-            item.posY,
-            item.posY + 200,
-            () => {
-              item.hasPickedUp = true;
-              console.log("hit the fish");
-            }
-          );
+
+          fill(0, 255, 0);
+          ellipse(item.posX, item.posY, 20);
         } else {
           console.log("invalid item type");
         }
+        isCatWithin(
+          item.posX,
+          item.posX + 50,
+          item.posY,
+          item.posY + 50,
+          () => {
+            item.hasPickedUp = true;
+            console.log("hit the fish");
+          }
+        );
       }
     });
   }
@@ -338,6 +335,11 @@ window.draw = () => {
     }
 
     opacityMouseAndFish();
+    fill(255, 0, 0);
+    ellipse(catX, catY, 20);
+    ellipse(catX, catY + CAT_HEIGHT, 20);
+    ellipse(catX + 60, catY + 15, 15);
+    console.log(catX + " " + catY);
   }
 
   // Displaying clouds in the sky
@@ -350,7 +352,7 @@ window.draw = () => {
   catY = catY + speedY;
 
   isCatWithin(-200, 1000, 600, 700);
-  isCatWithin(0, 100, 510, 530);
+  isCatWithin(60, 160, 510, 530);
   isCatWithin(110, 210, 480, 500);
   isCatWithin(200, 300, 430, 450);
   isCatWithin(320, 420, 510, 530);

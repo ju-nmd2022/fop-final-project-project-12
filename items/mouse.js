@@ -1,5 +1,6 @@
 export function mouse(x, y, s, alpha) {
   push();
+  translate(-160, -180);
   translate(x, y);
   scale(s);
   noStroke();

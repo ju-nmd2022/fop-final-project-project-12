@@ -114,6 +114,7 @@ export function sittingTellus(catX, catY, s) {
 
 export function standingTellus(catX, catY, s) {
   push();
+  translate(-25, -60);
   translate(catX, catY);
   scale(s);
   noStroke();

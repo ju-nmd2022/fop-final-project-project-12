@@ -1,5 +1,6 @@
 export function fish(x, y, s, alpha) {
   push();
+  translate(-170, -180);
   translate(x, y);
   scale(s);
   noStroke();
