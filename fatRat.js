@@ -28,7 +28,67 @@ function clouds(x, y, s) {
   pop();
 }
 
+//#region Items
+// let mouseItem1 = {
+//   id: "mouse1",
+//   type: "mouse",
+//   posX: 200,
+//   posY: 200,
+//   hasPickedUp: false,
+// };
+
+// let mouseItem2 = {
+//   id: "mouse2",
+//   type: "mouse",
+//   posX: 200,
+//   posY: 200,
+//   hasPickedUp: false,
+// };
+
+// let mouseItem3 = {
+//   id: "mouse3",
+//   type: "mouse",
+//   posX: 200,
+//   posY: 200,
+//   hasPickedUp: false,
+// };
+
+// let fishItem1 = {
+//   id: "fish1",
+//   type: "fish",
+//   posX: 300,
+//   posY: 400,
+//   hasPickedUp: false,
+// };
+
+// let fishItem2 = {
+//   id: "fish2",
+//   type: "fish",
+//   posX: 300,
+//   posY: 400,
+//   hasPickedUp: false,
+// };
+
+// let fishItem3 = {
+//   id: "fish3",
+//   type: "fish",
+//   posX: 300,
+//   posY: 400,
+//   hasPickedUp: false,
+// };
+//#endregion
+
 // Varaiables
+
+// let mouseAndFishArray = [
+//   mouseItem1,
+//   mouseItem2,
+//   mouseItem3,
+//   fishItem1,
+//   fishItem2,
+//   fishItem3,
+// ];
+
 const JUMP_HEIGHT = 16;
 const CAT_SPEED = 3;
 const CAT_HEIGHT = 120;
@@ -192,63 +252,74 @@ function gameScreen() {
   rect(740, 480, 100, 20);
   rect(860, 450, 100, 20);
 
-  // Item display in corner
   fish(-150, -170, 1, 100);
   fish(-100, -170, 1, 100);
   fish(-50, -170, 1, 100);
-  mouse(-100, -100, 0.8, 100);
+  // mouse(-100, -100, 0.8, 100);
   mouse(-50, -100, 0.8, 100);
   mouse(0, -100, 0.8, 100);
 
-  // Displaying clouds in the sky
-  clouds();
-  clouds(600, 90, 1);
-  clouds(250, 100, 0.7);
+  // function placeMouseAndFishOnScreen() {
+  //   mouseAndFishArray.forEach((item) => {
+  //     if (item.hasPickedUp) {
+  //       if (item.type === "mouse") {
+  //         mouse(-100, -100, 0.8);
+  //       } else {
+  //         mouse(-100, -100, 0.8, 100);
+  //       }
+  //     }
+  //   });
+  // }
+}
 
-  speedY += gravity;
-  catX = catX + speedX;
-  catY = catY + speedY;
+// Displaying clouds in the sky
+clouds();
+clouds(600, 90, 1);
+clouds(250, 100, 0.7);
 
-  isCatWithin(-200, 1000, 600, 700);
-  isCatWithin(0, 100, 510, 530);
-  isCatWithin(110, 210, 480, 500);
-  isCatWithin(200, 300, 430, 450);
-  isCatWithin(320, 420, 510, 530);
-  isCatWithin(400, 500, 400, 420);
-  isCatWithin(480, 580, 510, 530);
-  isCatWithin(600, 700, 360, 380);
-  isCatWithin(680, 780, 480, 500);
-  isCatWithin(800, 900, 450, 470);
+speedY += gravity;
+catX = catX + speedX;
+catY = catY + speedY;
 
-  if (keyIsDown(RIGHT_ARROW)) {
-    speedX = CAT_SPEED;
-  } else if (keyIsDown(LEFT_ARROW)) {
-    speedX = -CAT_SPEED;
-  } else {
-    speedX = 0;
-  }
+isCatWithin(-200, 1000, 600, 700);
+isCatWithin(0, 100, 510, 530);
+isCatWithin(110, 210, 480, 500);
+isCatWithin(200, 300, 430, 450);
+isCatWithin(320, 420, 510, 530);
+isCatWithin(400, 500, 400, 420);
+isCatWithin(480, 580, 510, 530);
+isCatWithin(600, 700, 360, 380);
+isCatWithin(680, 780, 480, 500);
+isCatWithin(800, 900, 450, 470);
 
-  if (keyIsDown(32) && catIsOnGround) {
-    speedY -= JUMP_HEIGHT;
-    catIsOnGround = false;
-  }
+if (keyIsDown(RIGHT_ARROW)) {
+  speedX = CAT_SPEED;
+} else if (keyIsDown(LEFT_ARROW)) {
+  speedX = -CAT_SPEED;
+} else {
+  speedX = 0;
+}
 
-  switch (character) {
-    case "fia":
-      standingFia(catX, catY, 0.8);
-      break;
+if (keyIsDown(32) && catIsOnGround) {
+  speedY -= JUMP_HEIGHT;
+  catIsOnGround = false;
+}
 
-    case "tellus":
-      standingTellus(catX, catY, 0.8);
-      break;
+switch (character) {
+  case "fia":
+    standingFia(catX, catY, 0.8);
+    break;
 
-    case "stella":
-      standingStella(catX, catY, 0.8);
-      break;
+  case "tellus":
+    standingTellus(catX, catY, 0.8);
+    break;
 
-    default:
-      console.log("no character chosen");
-  }
+  case "stella":
+    standingStella(catX, catY, 0.8);
+    break;
+
+  default:
+    console.log("no character chosen");
 }
 
 function isCatWithin(x1, x2, y1, y2, callback) {
