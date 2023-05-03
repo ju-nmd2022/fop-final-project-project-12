@@ -56,6 +56,7 @@ function startScreen() {
 
   clouds();
   clouds(600, 90, 1);
+  clouds(100, 100, 0.2);
   clouds(250, 100, 0.7);
 
   fatRat(500, 250);
