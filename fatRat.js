@@ -32,48 +32,48 @@ function clouds(x, y, s) {
 let mouseItem1 = {
   id: "mouse1",
   type: "mouse",
-  posX: 0,
-  posY: 0,
+  posX: 90,
+  posY: 480,
   hasPickedUp: false,
 };
 
 let mouseItem2 = {
   id: "mouse2",
   type: "mouse",
-  posX: 100,
-  posY: 306,
+  posX: 240,
+  posY: 400,
   hasPickedUp: false,
 };
 
 let mouseItem3 = {
   id: "mouse3",
   type: "mouse",
-  posX: 200,
-  posY: 200,
+  posX: 700,
+  posY: 330,
   hasPickedUp: false,
 };
 
 let fishItem1 = {
   id: "fish1",
   type: "fish",
-  posX: 0,
-  posY: 0,
+  posX: 450,
+  posY: 375,
   hasPickedUp: false,
 };
 
 let fishItem2 = {
   id: "fish2",
   type: "fish",
-  posX: 200,
-  posY: 400,
+  posX: 600,
+  posY: 485,
   hasPickedUp: false,
 };
 
 let fishItem3 = {
   id: "fish3",
   type: "fish",
-  posX: 100,
-  posY: 400,
+  posX: 900,
+  posY: 425,
   hasPickedUp: false,
 };
 //#endregion
@@ -126,25 +126,19 @@ window.draw = () => {
     mouseAndFishArray.forEach((item, index) => {
       if (item.hasPickedUp) {
         if (item.type === "mouse") {
-          mouse(index * 50 - 150, -150, 1, 100);
+          mouse(index * 50, 0, 1, 255);
         } else if (item.type === "fish") {
-          fish(index * 50 - 150, -150, 1, 100);
+          fish(index * 50, 0, 1, 255);
         } else {
           console.log("invalid item type");
         }
       } else {
         if (item.type === "mouse") {
-          mouse(index * 50 - 150, -150, 1, 50);
+          mouse(index * 50, 0, 1, 50);
           mouse(item.posX, item.posY, 1, 255);
-
-          fill(0, 255, 255);
-          ellipse(item.posX, item.posY, 20);
         } else if (item.type === "fish") {
-          fish(index * 50 - 150, -150, 1, 50);
+          fish(index * 50, 0, 1, 50);
           fish(item.posX, item.posY, 1, 255);
-
-          fill(0, 255, 0);
-          ellipse(item.posX, item.posY, 20);
         } else {
           console.log("invalid item type");
         }
@@ -335,11 +329,6 @@ window.draw = () => {
     }
 
     opacityMouseAndFish();
-    fill(255, 0, 0);
-    ellipse(catX, catY, 20);
-    ellipse(catX, catY + CAT_HEIGHT, 20);
-    ellipse(catX + 60, catY + 15, 15);
-    console.log(catX + " " + catY);
   }
 
   // Displaying clouds in the sky
@@ -352,15 +341,15 @@ window.draw = () => {
   catY = catY + speedY;
 
   isCatWithin(-200, 1000, 600, 700);
-  isCatWithin(60, 160, 510, 530);
-  isCatWithin(110, 210, 480, 500);
-  isCatWithin(200, 300, 430, 450);
-  isCatWithin(320, 420, 510, 530);
-  isCatWithin(400, 500, 400, 420);
-  isCatWithin(480, 580, 510, 530);
-  isCatWithin(600, 700, 360, 380);
-  isCatWithin(680, 780, 480, 500);
-  isCatWithin(800, 900, 450, 470);
+  isCatWithin(30, 130, 510, 530);
+  isCatWithin(140, 240, 480, 500);
+  isCatWithin(220, 320, 430, 450);
+  isCatWithin(350, 450, 510, 530);
+  isCatWithin(430, 530, 400, 420);
+  isCatWithin(510, 610, 510, 530);
+  isCatWithin(630, 730, 360, 380);
+  isCatWithin(710, 810, 480, 500);
+  isCatWithin(830, 930, 450, 470);
 
   if (keyIsDown(RIGHT_ARROW)) {
     speedX = CAT_SPEED;
