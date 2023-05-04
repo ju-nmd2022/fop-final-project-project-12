@@ -114,6 +114,7 @@ export function sittingStella(catX, catY, s) {
 
 export function standingStella(catX, catY, s) {
   push();
+  translate(-25, -60);
   translate(catX, catY);
   scale(s);
   noStroke();

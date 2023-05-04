@@ -114,6 +114,7 @@ export function sittingFia(catX, catY, s) {
 
 export function standingFia(catX, catY, s) {
   push();
+  translate(-25, -60);
   translate(catX, catY);
   scale(s);
   noStroke();
