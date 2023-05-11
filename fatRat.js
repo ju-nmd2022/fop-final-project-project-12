@@ -28,6 +28,11 @@ function clouds(x, y, s) {
   pop();
 }
 
+function doorToNextLevel() {
+  fill(0, 0, 0);
+  rect(840, 500, 50, 100);
+}
+
 //#region Item objects
 let mouseItem1 = {
   id: "mouse1",
@@ -78,6 +83,7 @@ let fishItem3 = {
 };
 //#endregion
 
+//#region Cactus objects
 let cactus1 = {
   id: "cactus1",
   type: "cactus",
@@ -86,6 +92,23 @@ let cactus1 = {
   hasLandedOn: false,
 };
 
+let cactus2 = {
+  id: "cactus2",
+  type: "cactus",
+  posX: 200,
+  posY: 455,
+  hasLandedOn: false,
+};
+
+//#endregion
+
+let door1 = {
+  id: "door1",
+  type: "door",
+  posX: 840,
+  posY: 500,
+  hasOpened: false,
+};
 // Array for items to pick up
 let mouseAndFishArray = [
   mouseItem1,
@@ -96,7 +119,10 @@ let mouseAndFishArray = [
   fishItem3,
 ];
 
-let cactusArray = [cactus1];
+let itemPickedUp = [];
+
+// Array for cactus
+let cactusArray = [cactus1, cactus2];
 
 const JUMP_HEIGHT = 16;
 const CAT_SPEED = 3;
@@ -132,60 +158,6 @@ function isHeadWithin(x1, x2, y1, y2, callback) {
 }
 
 window.draw = () => {
-  function opacityMouseAndFish() {
-    mouseAndFishArray.forEach((item, index) => {
-      if (item.hasPickedUp) {
-        if (item.type === "mouse") {
-          mouse(index * 50, 0, 1, 255);
-        } else if (item.type === "fish") {
-          fish(index * 50, 0, 1, 255);
-        } else {
-          console.log("invalid item type");
-        }
-      } else {
-        if (item.type === "mouse") {
-          mouse(index * 50, 0, 1, 50);
-          mouse(item.posX, item.posY, 1, 255);
-        } else if (item.type === "fish") {
-          fish(index * 50, 0, 1, 50);
-          fish(item.posX, item.posY, 1, 255);
-        } else {
-          console.log("invalid item type");
-        }
-        isCatWithin(
-          item.posX,
-          item.posX + 50,
-          item.posY,
-          item.posY + 50,
-          () => {
-            item.hasPickedUp = true;
-            console.log("hit the fish");
-          }
-        );
-      }
-    });
-  }
-
-  function walkedInOnCactus() {
-    cactusArray.forEach((enemy) => {
-      if (enemy.hasLandedOn) {
-        state = "lose";
-      } else {
-        cactus(enemy.posX, enemy.posY, 0.3);
-      }
-      isCatWithin(
-        enemy.posX,
-        enemy.posX + 70,
-        enemy.posY,
-        enemy.posY + 200,
-        () => {
-          enemy.hasLandedOn = true;
-          console.log("has landed on cactus");
-        }
-      );
-    });
-  }
-
   // Screens
   function startScreen() {
     state = "start";
@@ -384,6 +356,76 @@ window.draw = () => {
       catIsOnGround = false;
     }
 
+    function opacityMouseAndFish() {
+      mouseAndFishArray.forEach((item, index) => {
+        if (item.hasPickedUp) {
+          if (item.type === "mouse") {
+            mouse(index * 50, 0, 1, 255);
+          } else if (item.type === "fish") {
+            fish(index * 50, 0, 1, 255);
+          } else {
+            // console.log("invalid item type");
+          }
+        } else {
+          if (item.type === "mouse") {
+            mouse(index * 50, 0, 1, 50);
+            mouse(item.posX, item.posY, 1, 255);
+          } else if (item.type === "fish") {
+            fish(index * 50, 0, 1, 50);
+            fish(item.posX, item.posY, 1, 255);
+          } else {
+            // console.log("invalid item type");
+          }
+          isCatWithin(
+            item.posX,
+            item.posX + 50,
+            item.posY,
+            item.posY + 50,
+            () => {
+              item.hasPickedUp = true;
+              itemPickedUp.push(item);
+              // console.log("hit the fish");
+            }
+          );
+        }
+      });
+
+      if (itemPickedUp.length === 6) {
+        doorToNextLevel();
+
+        isCatWithin(
+          door1.posX,
+          door1.posX + 50,
+          door1.posY,
+          door1.posY + 100,
+          () => {
+            door1.hasOpened = true;
+            console.log("nylevel");
+            state = "level2";
+          }
+        );
+      }
+    }
+
+    function walkedInOnCactus() {
+      cactusArray.forEach((enemy) => {
+        if (enemy.hasLandedOn) {
+          state = "lose";
+        } else {
+          cactus(enemy.posX, enemy.posY, 0.3);
+        }
+        isCatWithin(
+          enemy.posX,
+          enemy.posX + 70,
+          enemy.posY,
+          enemy.posY + 200,
+          () => {
+            enemy.hasLandedOn = true;
+            // console.log("has landed on cactus");
+          }
+        );
+      });
+    }
     opacityMouseAndFish();
     walkedInOnCactus();
   }
@@ -400,5 +442,6 @@ window.draw = () => {
     gameScreen();
   } else if (state === "lose") {
     loseScreen();
+    // window.setTimeout(loseScreen, 10000);
   }
 };
