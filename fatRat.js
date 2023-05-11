@@ -173,8 +173,6 @@ window.draw = () => {
     clouds(100, 100, 0.2);
     clouds(250, 100, 0.7);
 
-    fatRat(500, 250);
-
     // Instructions
     fill(80, 80, 80);
     textSize(30);
@@ -306,9 +304,11 @@ window.draw = () => {
     rect(740, 480, 100, 20);
     rect(860, 450, 100, 20);
 
+    let catMirror = 1;
+
     switch (character) {
       case "fia":
-        standingFia(catX, catY, 0.8);
+        standingFia(catX, catY, catMirror, 0.8);
         break;
 
       case "tellus":
@@ -346,7 +346,9 @@ window.draw = () => {
     if (keyIsDown(RIGHT_ARROW)) {
       speedX = CAT_SPEED;
     } else if (keyIsDown(LEFT_ARROW)) {
+      catMirror = -1;
       speedX = -CAT_SPEED;
+      console.log(catMirror);
     } else {
       speedX = 0;
     }
@@ -471,8 +473,6 @@ window.draw = () => {
     clouds();
     clouds(600, 90, 1);
     clouds(250, 100, 0.7);
-
-    
   }
 
   if (state === "start") {

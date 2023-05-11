@@ -112,10 +112,13 @@ export function sittingFia(catX, catY, s) {
   pop();
 }
 
-export function standingFia(catX, catY, s) {
+export function standingFia(catX, catY, catMirror, s) {
   push();
   translate(-25, -60);
   translate(catX, catY);
+  translate(60, 0);
+  scale(catMirror, 1);
+  translate(-60, 0);
   scale(s);
   noStroke();
 
