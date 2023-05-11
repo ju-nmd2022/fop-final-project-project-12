@@ -78,6 +78,14 @@ let fishItem3 = {
 };
 //#endregion
 
+let cactus1 = {
+  id: "cactus1",
+  type: "cactus",
+  posX: 300,
+  posY: 455,
+  hasLandedOn: false,
+};
+
 // Array for items to pick up
 let mouseAndFishArray = [
   mouseItem1,
@@ -87,6 +95,8 @@ let mouseAndFishArray = [
   fishItem2,
   fishItem3,
 ];
+
+let cactusArray = [cactus1];
 
 const JUMP_HEIGHT = 16;
 const CAT_SPEED = 3;
@@ -153,6 +163,26 @@ window.draw = () => {
           }
         );
       }
+    });
+  }
+
+  function walkedInOnCactus() {
+    cactusArray.forEach((enemy) => {
+      if (enemy.hasLandedOn) {
+        state = "lose";
+      } else {
+        cactus(enemy.posX, enemy.posY, 0.3);
+      }
+      isCatWithin(
+        enemy.posX,
+        enemy.posX + 70,
+        enemy.posY,
+        enemy.posY + 200,
+        () => {
+          enemy.hasLandedOn = true;
+          console.log("has landed on cactus");
+        }
+      );
     });
   }
 
@@ -304,13 +334,6 @@ window.draw = () => {
     rect(740, 480, 100, 20);
     rect(860, 450, 100, 20);
 
-    // fish(-150, -170, 1, 100);
-    // fish(-100, -170, 1, 100);
-    // fish(-50, -170, 1, 100);
-    // mouse(-100, -100, 0.8, 100);
-    // mouse(-50, -100, 0.8, 100);
-    // mouse(0, -100, 0.8, 100);
-
     switch (character) {
       case "fia":
         standingFia(catX, catY, 0.8);
@@ -328,40 +351,45 @@ window.draw = () => {
         console.log("no character chosen");
     }
 
+    // Displaying clouds in the sky
+    clouds();
+    clouds(600, 90, 1);
+    clouds(250, 100, 0.7);
+
+    speedY += gravity;
+    catX = catX + speedX;
+    catY = catY + speedY;
+
+    isCatWithin(-200, 1000, 600, 700);
+    isCatWithin(30, 130, 510, 530);
+    isCatWithin(140, 240, 480, 500);
+    isCatWithin(220, 320, 430, 450);
+    isCatWithin(350, 450, 510, 530);
+    isCatWithin(430, 530, 400, 420);
+    isCatWithin(510, 610, 510, 530);
+    isCatWithin(630, 730, 360, 380);
+    isCatWithin(710, 810, 480, 500);
+    isCatWithin(830, 930, 450, 470);
+
+    if (keyIsDown(RIGHT_ARROW)) {
+      speedX = CAT_SPEED;
+    } else if (keyIsDown(LEFT_ARROW)) {
+      speedX = -CAT_SPEED;
+    } else {
+      speedX = 0;
+    }
+
+    if (keyIsDown(32) && catIsOnGround) {
+      speedY -= JUMP_HEIGHT;
+      catIsOnGround = false;
+    }
+
     opacityMouseAndFish();
+    walkedInOnCactus();
   }
 
-  // Displaying clouds in the sky
-  clouds();
-  clouds(600, 90, 1);
-  clouds(250, 100, 0.7);
-
-  speedY += gravity;
-  catX = catX + speedX;
-  catY = catY + speedY;
-
-  isCatWithin(-200, 1000, 600, 700);
-  isCatWithin(30, 130, 510, 530);
-  isCatWithin(140, 240, 480, 500);
-  isCatWithin(220, 320, 430, 450);
-  isCatWithin(350, 450, 510, 530);
-  isCatWithin(430, 530, 400, 420);
-  isCatWithin(510, 610, 510, 530);
-  isCatWithin(630, 730, 360, 380);
-  isCatWithin(710, 810, 480, 500);
-  isCatWithin(830, 930, 450, 470);
-
-  if (keyIsDown(RIGHT_ARROW)) {
-    speedX = CAT_SPEED;
-  } else if (keyIsDown(LEFT_ARROW)) {
-    speedX = -CAT_SPEED;
-  } else {
-    speedX = 0;
-  }
-
-  if (keyIsDown(32) && catIsOnGround) {
-    speedY -= JUMP_HEIGHT;
-    catIsOnGround = false;
+  function loseScreen() {
+    background(255, 0, 0);
   }
 
   if (state === "start") {
@@ -370,5 +398,7 @@ window.draw = () => {
     characterScreen();
   } else if (state === "game") {
     gameScreen();
+  } else if (state === "lose") {
+    loseScreen();
   }
 };
