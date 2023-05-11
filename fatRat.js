@@ -401,7 +401,7 @@ window.draw = () => {
           () => {
             door1.hasOpened = true;
             console.log("nylevel");
-            state = "level2";
+            state = "levelTwo";
           }
         );
       }
@@ -434,6 +434,47 @@ window.draw = () => {
     background(255, 0, 0);
   }
 
+  function levelTwoScreen() {
+    state = "levelTwo";
+    noStroke();
+    background(135, 206, 250);
+
+    // Grass
+    fill(112, 209, 126);
+    rect(0, 600, 1000);
+
+    // The vertical rect of cat tree
+    fill(181, 174, 153);
+    rect(100, 300, 20, 300);
+    rect(210, 350, 20, 250);
+    rect(290, 450, 20, 150);
+    rect(420, 500, 20, 100);
+    rect(500, 420, 20, 180);
+    rect(580, 530, 20, 70);
+    rect(700, 410, 20, 190);
+    rect(780, 500, 20, 100);
+    rect(900, 470, 20, 130);
+
+    // The horizontal rect of cat tree
+    fill(217, 217, 217);
+    rect(60, 300, 100, 20);
+    rect(170, 350, 100, 20);
+    rect(250, 430, 100, 20);
+    rect(380, 500, 100, 20);
+    rect(460, 400, 100, 20);
+    rect(540, 510, 100, 20);
+    rect(660, 410, 100, 20);
+    rect(740, 480, 100, 20);
+    rect(860, 450, 100, 20);
+
+    // Displaying clouds in the sky
+    clouds();
+    clouds(600, 90, 1);
+    clouds(250, 100, 0.7);
+
+    
+  }
+
   if (state === "start") {
     startScreen();
   } else if (state === "choose") {
@@ -443,5 +484,7 @@ window.draw = () => {
   } else if (state === "lose") {
     loseScreen();
     // window.setTimeout(loseScreen, 10000);
+  } else if (state === "levelTwo") {
+    levelTwoScreen();
   }
 };
