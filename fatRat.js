@@ -135,6 +135,8 @@ let gravity = 1;
 let catX = 0;
 let catY = 600 - CAT_HEIGHT;
 let catIsOnGround = false;
+let catMirror = 1;
+let s = 0.8;
 
 let state = "start";
 let character = null;
@@ -304,19 +306,17 @@ window.draw = () => {
     rect(740, 480, 100, 20);
     rect(860, 450, 100, 20);
 
-    let catMirror = 1;
-
     switch (character) {
       case "fia":
-        standingFia(catX, catY, catMirror, 0.8);
+        standingFia(catX, catY, catMirror, s);
         break;
 
       case "tellus":
-        standingTellus(catX, catY, 0.8);
+        standingTellus(catX, catY, catMirror, s);
         break;
 
       case "stella":
-        standingStella(catX, catY, 0.8);
+        standingStella(catX, catY, catMirror, s);
         break;
 
       default:
@@ -345,10 +345,10 @@ window.draw = () => {
 
     if (keyIsDown(RIGHT_ARROW)) {
       speedX = CAT_SPEED;
+      catMirror = 1;
     } else if (keyIsDown(LEFT_ARROW)) {
-      catMirror = -1;
       speedX = -CAT_SPEED;
-      console.log(catMirror);
+      catMirror = -1;
     } else {
       speedX = 0;
     }

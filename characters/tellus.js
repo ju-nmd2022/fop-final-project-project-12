@@ -112,10 +112,13 @@ export function sittingTellus(catX, catY, s) {
   pop();
 }
 
-export function standingTellus(catX, catY, s) {
+export function standingTellus(catX, catY, catMirror, s) {
   push();
   translate(-25, -60);
   translate(catX, catY);
+  translate(60, 0);
+  scale(catMirror, 1);
+  translate(-60, 0);
   scale(s);
   noStroke();
 
