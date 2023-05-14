@@ -33,6 +33,90 @@ function doorToNextLevel() {
   rect(840, 500, 50, 100);
 }
 
+//#region catTreeObjects
+let catTree1 = {
+  type: "catTree",
+  posX: 60,
+  posY: 510,
+  hasLandedOn: false,
+  posXVertical: 100,
+  posYVertical: 530,
+};
+
+let catTree2 = {
+  type: "catTree",
+  posX: 170,
+  posY: 480,
+  hasLandedOn: false,
+  posXVertical: 210,
+  posYVertical: 500,
+};
+
+let catTree3 = {
+  type: "catTree",
+  posX: 250,
+  posY: 430,
+  hasLandedOn: false,
+  posXVertical: 290,
+  posYVertical: 450,
+};
+
+let catTree4 = {
+  type: "catTree",
+  posX: 380,
+  posY: 510,
+  hasLandedOn: false,
+  posXVertical: 420,
+  posYVertical: 530,
+};
+
+let catTree5 = {
+  type: "catTree",
+  posX: 460,
+  posY: 400,
+  hasLandedOn: false,
+  posXVertical: 500,
+  posYVertical: 420,
+};
+
+let catTree6 = {
+  type: "catTree",
+  posX: 540,
+  posY: 510,
+  hasLandedOn: false,
+  posXVertical: 580,
+  posYVertical: 530,
+};
+
+let catTree7 = {
+  type: "catTree",
+  posX: 660,
+  posY: 360,
+  hasLandedOn: false,
+  posXVertical: 700,
+  posYVertical: 380,
+};
+
+let catTree8 = {
+  type: "catTree",
+  posX: 740,
+  posY: 480,
+  hasLandedOn: false,
+  posXVertical: 780,
+  posYVertical: 500,
+};
+
+let catTree9 = {
+  type: "catTree",
+  posX: 860,
+  posY: 450,
+  hasLandedOn: false,
+  posXVertical: 900,
+  posYVertical: 470,
+};
+
+//#endregion
+
 //#region Item objects
 let mouseItem1 = {
   id: "mouse1",
@@ -117,6 +201,18 @@ let mouseAndFishArray = [
   fishItem1,
   fishItem2,
   fishItem3,
+];
+
+let catTreeArray = [
+  catTree1,
+  catTree2,
+  catTree3,
+  catTree4,
+  catTree5,
+  catTree6,
+  catTree7,
+  catTree8,
+  catTree9,
 ];
 
 let itemPickedUp = [];
@@ -358,6 +454,17 @@ window.draw = () => {
       catIsOnGround = false;
     }
 
+    // function catTreeDisplay() {
+    //   console.log("catTreeDisplay is called");
+    //   catTreeArray.forEach((item) => {
+    //     fill(217, 217, 217);
+    //     rect(item.posX, item.posY, 100, 20);
+
+    //     fill(181, 174, 153);
+    //     rect(item.posXVertical, item.posYVertical, 20, 70);
+    //   });
+    // }
+
     function opacityMouseAndFish() {
       mouseAndFishArray.forEach((item, index) => {
         if (item.hasPickedUp) {
@@ -428,6 +535,7 @@ window.draw = () => {
         );
       });
     }
+
     opacityMouseAndFish();
     walkedInOnCactus();
   }
@@ -483,7 +591,6 @@ window.draw = () => {
     gameScreen();
   } else if (state === "lose") {
     loseScreen();
-    // window.setTimeout(loseScreen, 10000);
   } else if (state === "levelTwo") {
     levelTwoScreen();
   }
