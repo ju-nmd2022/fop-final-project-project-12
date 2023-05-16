@@ -41,6 +41,7 @@ let catTree1 = {
   hasLandedOn: false,
   posXVertical: 100,
   posYVertical: 530,
+  height: 70,
 };
 
 let catTree2 = {
@@ -50,6 +51,7 @@ let catTree2 = {
   hasLandedOn: false,
   posXVertical: 210,
   posYVertical: 500,
+  height: 100,
 };
 
 let catTree3 = {
@@ -59,6 +61,7 @@ let catTree3 = {
   hasLandedOn: false,
   posXVertical: 290,
   posYVertical: 450,
+  height: 150,
 };
 
 let catTree4 = {
@@ -68,6 +71,7 @@ let catTree4 = {
   hasLandedOn: false,
   posXVertical: 420,
   posYVertical: 530,
+  height: 70,
 };
 
 let catTree5 = {
@@ -77,6 +81,7 @@ let catTree5 = {
   hasLandedOn: false,
   posXVertical: 500,
   posYVertical: 420,
+  height: 180,
 };
 
 let catTree6 = {
@@ -86,6 +91,7 @@ let catTree6 = {
   hasLandedOn: false,
   posXVertical: 580,
   posYVertical: 530,
+  height: 70,
 };
 
 let catTree7 = {
@@ -95,6 +101,7 @@ let catTree7 = {
   hasLandedOn: false,
   posXVertical: 700,
   posYVertical: 380,
+  height: 220,
 };
 
 let catTree8 = {
@@ -104,6 +111,7 @@ let catTree8 = {
   hasLandedOn: false,
   posXVertical: 780,
   posYVertical: 500,
+  height: 100,
 };
 
 let catTree9 = {
@@ -113,6 +121,7 @@ let catTree9 = {
   hasLandedOn: false,
   posXVertical: 900,
   posYVertical: 470,
+  height: 130,
 };
 
 //#endregion
@@ -454,16 +463,16 @@ window.draw = () => {
       catIsOnGround = false;
     }
 
-    // function catTreeDisplay() {
-    //   console.log("catTreeDisplay is called");
-    //   catTreeArray.forEach((item) => {
-    //     fill(217, 217, 217);
-    //     rect(item.posX, item.posY, 100, 20);
+    function catTreeDisplay() {
+      console.log("catTreeDisplay is called");
+      catTreeArray.forEach((item) => {
+        fill(217, 217, 217);
+        rect(item.posX, item.posY, 100, 20);
 
-    //     fill(181, 174, 153);
-    //     rect(item.posXVertical, item.posYVertical, 20, 70);
-    //   });
-    // }
+        fill(181, 174, 153);
+        rect(item.posXVertical, item.posYVertical, 20, item.height);
+      });
+    }
 
     function opacityMouseAndFish() {
       mouseAndFishArray.forEach((item, index) => {
@@ -535,7 +544,7 @@ window.draw = () => {
         );
       });
     }
-
+    catTreeDisplay();
     opacityMouseAndFish();
     walkedInOnCactus();
   }
