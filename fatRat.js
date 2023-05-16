@@ -33,12 +33,6 @@ function doorToNextLevel() {
   rect(840, 500, 50, 100);
 }
 
-function nextButton(x, y, w, h) {
-  fill(255, 206, 253);
-  rect(x, y, w, h);
-  triangle(930, 500, 980, 535, 930, 570);
-}
-
 let catTreeLevelTwo1 = {
   type: "catTree",
   posX: 60,
@@ -410,11 +404,17 @@ window.draw = () => {
     fill(80, 80, 80);
     textSize(50);
     textStyle(BOLD);
-    text("THE GREAT SEARCH", 200, 150);
-    text("FOR THE", 490, 220);
+    text("THE GREAT SEARCH", 200, 200);
+    text("FOR THE", 490, 260);
     textSize(150);
     textStyle(ITALIC);
-    text("FAT RAT", 170, 350);
+    text("FAT RAT", 170, 390);
+
+    function nextButton(x, y, w, h) {
+      fill(255, 206, 253);
+      rect(x, y, w, h);
+      triangle(930, 500, 980, 535, 930, 570);
+    }
 
     nextButton(770, 520, 170, 30);
     cactus(50, 450, 0.5);
@@ -448,25 +448,46 @@ window.draw = () => {
     clouds(100, 100, 0.2);
     clouds(250, 100, 0.7);
 
+    fill(80, 80, 80);
+    textSize(20);
+    textStyle(BOLD);
+    text("There is a fat rat lost in ", 550, 100);
+    text("the jungle of cat trees. Choose", 550, 150);
+    text("between the cats Fia, Tellus & Stella", 550, 200);
+    text("and try to help the fat rat find home.", 550, 250);
+    text("Make the cat get through the ?levels.", 550, 350);
+    text("But look out for the cacutuses...", 550, 400);
+
     fill(255, 255, 255);
-    textSize(20);
-    text("How to play:", 40, 400);
+    textStyle(NORMAL);
+    textSize(30);
+    text("How to play:", 90, 230);
 
-    triangle(90, 455, 110, 465, 110, 445);
-    triangle(210, 445, 210, 465, 230, 455);
-    rect(60, 500, 200, 30);
-    fill(0, 0, 0);
+    triangle(90, 285, 110, 295, 110, 275);
+    triangle(210, 275, 210, 295, 230, 285);
+    rect(125, 320, 70, 15);
     textSize(20);
-    text("JUMP", 125, 520);
+    text("Use the left and right", 90, 400);
+    text("arrows to stear.", 90, 420);
+    text("And spacebar to jump", 90, 440);
 
-    nextButton(770, 520, 170, 30);
+    function characterButton(x, y, w, h) {
+      fill(255, 206, 253);
+      rect(x, y, w, h);
+      fill(0, 0, 0);
+      textSize(13);
+      text("CHOOSE YOUR CHARACTER", 405, 480);
+      text("Melody from 'Super Smash Bros'", 405, 500);
+    }
+
+    characterButton(400, 450, 200, 70);
 
     if (
       mouseIsPressed &&
-      mouseX > 770 &&
-      mouseX < 770 + 160 &&
-      mouseY > 520 &&
-      mouseY < 520 + 30 &&
+      mouseX > 400 &&
+      mouseX < 400 + 200 &&
+      mouseY > 450 &&
+      mouseY < 450 + 70 &&
       state === "info"
     ) {
       state = "choose";
