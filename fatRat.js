@@ -33,6 +33,12 @@ function doorToNextLevel() {
   rect(840, 500, 50, 100);
 }
 
+function nextButton(x, y, w, h) {
+  fill(255, 206, 253);
+  rect(x, y, w, h);
+  triangle(930, 500, 980, 535, 930, 570);
+}
+
 let catTreeLevelTwo1 = {
   type: "catTree",
   posX: 60,
@@ -402,9 +408,45 @@ window.draw = () => {
 
     // Instructions
     fill(80, 80, 80);
-    textSize(30);
-    text("There is a fat rat lost in the jungle of cat-trees", 150, 250);
-    text("and we need your help to find him!! Can you help us?", 150, 300);
+    textSize(50);
+    textStyle(BOLD);
+    text("THE GREAT SEARCH", 200, 150);
+    text("FOR THE", 490, 220);
+    textSize(150);
+    textStyle(ITALIC);
+    text("FAT RAT", 170, 350);
+
+    nextButton(770, 520, 170, 30);
+    cactus(50, 450, 0.5);
+    sittingTellus(100, 450);
+    fish(170, 545);
+
+    if (
+      mouseIsPressed &&
+      mouseX > 770 &&
+      mouseX < 770 + 160 &&
+      mouseY > 520 &&
+      mouseY < 520 + 30 &&
+      state === "start"
+    ) {
+      state = "info";
+    }
+  }
+
+  function infoScreen() {
+    state = "info";
+
+    background(135, 206, 250);
+    noStroke();
+
+    // Decoration
+    fill(112, 209, 126);
+    rect(0, 600, 1000);
+
+    clouds();
+    clouds(600, 90, 1);
+    clouds(100, 100, 0.2);
+    clouds(250, 100, 0.7);
 
     fill(255, 255, 255);
     textSize(20);
@@ -417,23 +459,15 @@ window.draw = () => {
     textSize(20);
     text("JUMP", 125, 520);
 
-    function characterButton(x, y, w, h) {
-      fill(255, 182, 193);
-      rect(x, y, w, h);
-      fill(0, 0, 0);
-      textSize(20);
-      text("Choose your character!", x + 50, y + 30);
-    }
-
-    characterButton(350, 400, 300, 50);
+    nextButton(770, 520, 170, 30);
 
     if (
       mouseIsPressed &&
-      mouseX > 350 &&
-      mouseX < 350 + 300 &&
-      mouseY > 400 &&
-      mouseY < 400 + 50 &&
-      state === "start"
+      mouseX > 770 &&
+      mouseX < 770 + 160 &&
+      mouseY > 520 &&
+      mouseY < 520 + 30 &&
+      state === "info"
     ) {
       state = "choose";
     }
@@ -610,6 +644,8 @@ window.draw = () => {
 
   if (state === "start") {
     startScreen();
+  } else if (state === "info") {
+    infoScreen();
   } else if (state === "choose") {
     characterScreen();
   } else if (state === "game") {
