@@ -114,7 +114,7 @@ export function sittingTellus(catX, catY, s) {
 
 export function standingTellus(catX, catY, catMirror, s) {
   push();
-  translate(-25, -60);
+  translate(-80, -60);
   translate(catX, catY);
   translate(60, 0);
   scale(catMirror, 1);

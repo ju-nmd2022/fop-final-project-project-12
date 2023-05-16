@@ -114,7 +114,7 @@ export function sittingFia(catX, catY, s) {
 
 export function standingFia(catX, catY, catMirror, s) {
   push();
-  translate(-25, -60);
+  translate(-80, -60);
   translate(catX, catY);
   translate(60, 0);
   scale(catMirror, 1);

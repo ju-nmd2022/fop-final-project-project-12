@@ -33,7 +33,17 @@ function doorToNextLevel() {
   rect(840, 500, 50, 100);
 }
 
-//#region catTreeObjects
+let catTreeLevelTwo1 = {
+  type: "catTree",
+  posX: 60,
+  posY: 300,
+  hasLandedOn: false,
+  posXVertical: 100,
+  posYVertical: 300,
+  height: 300,
+};
+
+//#region Cat tree objects for level 1
 let catTree1 = {
   type: "catTree",
   posX: 60,
@@ -180,16 +190,16 @@ let fishItem3 = {
 let cactus1 = {
   id: "cactus1",
   type: "cactus",
-  posX: 300,
-  posY: 455,
+  posX: 350,
+  posY: 505,
   hasLandedOn: false,
 };
 
 let cactus2 = {
   id: "cactus2",
   type: "cactus",
-  posX: 200,
-  posY: 455,
+  posX: 650,
+  posY: 505,
   hasLandedOn: false,
 };
 
@@ -224,6 +234,11 @@ let catTreeArray = [
   catTree9,
 ];
 
+let catTreeArrayLevelTwo = [catTreeLevelTwo1];
+
+let lifeArray = ["❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️"];
+let dieArray = [];
+
 let itemPickedUp = [];
 
 // Array for cactus
@@ -249,6 +264,8 @@ let characterButtonIsClicked = false;
 
 let inventoryItemWidth = 60;
 
+//#region Functionality
+
 function isCatWithin(x1, x2, y1, y2, callback) {
   let newCatY = catY + CAT_HEIGHT;
   if (catX >= x1 && catX <= x2 && newCatY >= y1 && newCatY <= y2) {
@@ -263,6 +280,109 @@ function isCatWithin(x1, x2, y1, y2, callback) {
 function isHeadWithin(x1, x2, y1, y2, callback) {
   let newCatY = catY + CAT_HEIGHT;
 }
+
+function catTreeDisplay() {
+  catTreeArray.forEach((item) => {
+    fill(217, 217, 217);
+    rect(item.posX, item.posY, 100, 20);
+
+    fill(181, 174, 153);
+    rect(item.posXVertical, item.posYVertical, 20, item.height);
+  });
+}
+
+// function catTreeDisplayLevelTwo() {
+//   catTreeArrayLevelTwo.forEach((item) => {
+//     fill(217, 217, 217);
+//     rect(item.posX, item.posY, 100, 20);
+
+//     fill(181, 174, 153);
+//     rect(item.posXVertical, item.posYVertical, 20, item.height);
+//   });
+// }
+
+function opacityMouseAndFish() {
+  mouseAndFishArray.forEach((item, index) => {
+    if (item.hasPickedUp) {
+      if (item.type === "mouse") {
+        mouse(index * 50, 0, 1, 255);
+      } else if (item.type === "fish") {
+        fish(index * 50, 0, 1, 255);
+      } else {
+        // console.log("invalid item type");
+      }
+    } else {
+      if (item.type === "mouse") {
+        mouse(index * 50, 0, 1, 50);
+        mouse(item.posX, item.posY, 1, 255);
+      } else if (item.type === "fish") {
+        fish(index * 50, 0, 1, 50);
+        fish(item.posX, item.posY, 1, 255);
+      } else {
+        // console.log("invalid item type");
+      }
+      isCatWithin(item.posX, item.posX + 50, item.posY, item.posY + 50, () => {
+        item.hasPickedUp = true;
+        itemPickedUp.push(item);
+        // console.log("hit the fish");
+      });
+    }
+  });
+
+  if (itemPickedUp.length === 6) {
+    doorToNextLevel();
+
+    isCatWithin(
+      door1.posX,
+      door1.posX + 50,
+      door1.posY,
+      door1.posY + 100,
+      () => {
+        door1.hasOpened = true;
+        console.log("nylevel");
+        state = "levelTwo";
+        // catTreeDisplayLevelTwo();
+      }
+    );
+  }
+}
+
+function walkedInOnCactus() {
+  cactusArray.forEach((enemy) => {
+    if (enemy.hasLandedOn) {
+      fill(255, 206, 253);
+      rect(350, 200, 300, 100);
+      fill(0, 0, 0);
+      textSize(15);
+      textAlign(CENTER, CENTER);
+      text(
+        "Be careful! Do not walk in to the cactus.",
+        350 + 300 / 2,
+        200 + 100 / 2
+      );
+      text("You only have nine lives.", 350 + 250 / 2, 230 + 100 / 2);
+      lifeArray.push(dieArray);
+    } else {
+      cactus(enemy.posX, enemy.posY, 0.3);
+    }
+    isCatWithin(
+      enemy.posX,
+      enemy.posX + 50,
+      enemy.posY,
+      enemy.posY + 200,
+      () => {
+        enemy.hasLandedOn = true;
+      }
+    );
+  });
+}
+
+// function nineLives() {
+//   if (cactus1.hasLandedOn || cactus2.hasLandedOn) {
+//   }
+// }
+
+//#endregion
 
 window.draw = () => {
   // Screens
@@ -387,29 +507,40 @@ window.draw = () => {
     fill(112, 209, 126);
     rect(0, 600, 1000);
 
-    // The vertical rect of cat tree
-    fill(181, 174, 153);
-    rect(100, 530, 20, 70);
-    rect(210, 500, 20, 100);
-    rect(290, 450, 20, 150);
-    rect(420, 530, 20, 70);
-    rect(500, 420, 20, 180);
-    rect(580, 530, 20, 70);
-    rect(700, 380, 20, 220);
-    rect(780, 500, 20, 100);
-    rect(900, 470, 20, 130);
+    speedY += gravity;
+    catX = catX + speedX;
+    catY = catY + speedY;
 
-    // The horizontal rect of cat tree
-    fill(217, 217, 217);
-    rect(60, 510, 100, 20);
-    rect(170, 480, 100, 20);
-    rect(250, 430, 100, 20);
-    rect(380, 510, 100, 20);
-    rect(460, 400, 100, 20);
-    rect(540, 510, 100, 20);
-    rect(660, 360, 100, 20);
-    rect(740, 480, 100, 20);
-    rect(860, 450, 100, 20);
+    isCatWithin(-200, 1000, 600, 700);
+    isCatWithin(60, 160, 510, 530);
+    isCatWithin(170, 270, 480, 500);
+    isCatWithin(250, 350, 430, 450);
+    isCatWithin(380, 480, 510, 530);
+    isCatWithin(460, 560, 400, 420);
+    isCatWithin(540, 640, 510, 530);
+    isCatWithin(660, 760, 360, 380);
+    isCatWithin(740, 840, 480, 500);
+    isCatWithin(860, 960, 450, 470);
+
+    if (keyIsDown(RIGHT_ARROW)) {
+      speedX = CAT_SPEED;
+      catMirror = 1;
+    } else if (keyIsDown(LEFT_ARROW)) {
+      speedX = -CAT_SPEED;
+      catMirror = -1;
+    } else {
+      speedX = 0;
+    }
+
+    if (keyIsDown(32) && catIsOnGround) {
+      speedY -= JUMP_HEIGHT;
+      catIsOnGround = false;
+    }
+
+    catTreeDisplay();
+    opacityMouseAndFish();
+    walkedInOnCactus();
+    // nineLives();
 
     switch (character) {
       case "fia":
@@ -432,165 +563,50 @@ window.draw = () => {
     clouds();
     clouds(600, 90, 1);
     clouds(250, 100, 0.7);
-
-    speedY += gravity;
-    catX = catX + speedX;
-    catY = catY + speedY;
-
-    isCatWithin(-200, 1000, 600, 700);
-    isCatWithin(30, 130, 510, 530);
-    isCatWithin(140, 240, 480, 500);
-    isCatWithin(220, 320, 430, 450);
-    isCatWithin(350, 450, 510, 530);
-    isCatWithin(430, 530, 400, 420);
-    isCatWithin(510, 610, 510, 530);
-    isCatWithin(630, 730, 360, 380);
-    isCatWithin(710, 810, 480, 500);
-    isCatWithin(830, 930, 450, 470);
-
-    if (keyIsDown(RIGHT_ARROW)) {
-      speedX = CAT_SPEED;
-      catMirror = 1;
-    } else if (keyIsDown(LEFT_ARROW)) {
-      speedX = -CAT_SPEED;
-      catMirror = -1;
-    } else {
-      speedX = 0;
-    }
-
-    if (keyIsDown(32) && catIsOnGround) {
-      speedY -= JUMP_HEIGHT;
-      catIsOnGround = false;
-    }
-
-    function catTreeDisplay() {
-      console.log("catTreeDisplay is called");
-      catTreeArray.forEach((item) => {
-        fill(217, 217, 217);
-        rect(item.posX, item.posY, 100, 20);
-
-        fill(181, 174, 153);
-        rect(item.posXVertical, item.posYVertical, 20, item.height);
-      });
-    }
-
-    function opacityMouseAndFish() {
-      mouseAndFishArray.forEach((item, index) => {
-        if (item.hasPickedUp) {
-          if (item.type === "mouse") {
-            mouse(index * 50, 0, 1, 255);
-          } else if (item.type === "fish") {
-            fish(index * 50, 0, 1, 255);
-          } else {
-            // console.log("invalid item type");
-          }
-        } else {
-          if (item.type === "mouse") {
-            mouse(index * 50, 0, 1, 50);
-            mouse(item.posX, item.posY, 1, 255);
-          } else if (item.type === "fish") {
-            fish(index * 50, 0, 1, 50);
-            fish(item.posX, item.posY, 1, 255);
-          } else {
-            // console.log("invalid item type");
-          }
-          isCatWithin(
-            item.posX,
-            item.posX + 50,
-            item.posY,
-            item.posY + 50,
-            () => {
-              item.hasPickedUp = true;
-              itemPickedUp.push(item);
-              // console.log("hit the fish");
-            }
-          );
-        }
-      });
-
-      if (itemPickedUp.length === 6) {
-        doorToNextLevel();
-
-        isCatWithin(
-          door1.posX,
-          door1.posX + 50,
-          door1.posY,
-          door1.posY + 100,
-          () => {
-            door1.hasOpened = true;
-            console.log("nylevel");
-            state = "levelTwo";
-          }
-        );
-      }
-    }
-
-    function walkedInOnCactus() {
-      cactusArray.forEach((enemy) => {
-        if (enemy.hasLandedOn) {
-          state = "lose";
-        } else {
-          cactus(enemy.posX, enemy.posY, 0.3);
-        }
-        isCatWithin(
-          enemy.posX,
-          enemy.posX + 70,
-          enemy.posY,
-          enemy.posY + 200,
-          () => {
-            enemy.hasLandedOn = true;
-            // console.log("has landed on cactus");
-          }
-        );
-      });
-    }
-    catTreeDisplay();
-    opacityMouseAndFish();
-    walkedInOnCactus();
   }
 
   function loseScreen() {
     background(255, 0, 0);
   }
 
-  function levelTwoScreen() {
-    state = "levelTwo";
-    noStroke();
-    background(135, 206, 250);
+  // function levelTwoScreen() {
+  //   state = "levelTwo";
+  //   noStroke();
+  //   background(135, 206, 250);
 
-    // Grass
-    fill(112, 209, 126);
-    rect(0, 600, 1000);
+  //   // Grass
+  //   fill(112, 209, 126);
+  //   rect(0, 600, 1000);
 
-    // The vertical rect of cat tree
-    fill(181, 174, 153);
-    rect(100, 300, 20, 300);
-    rect(210, 350, 20, 250);
-    rect(290, 450, 20, 150);
-    rect(420, 500, 20, 100);
-    rect(500, 420, 20, 180);
-    rect(580, 530, 20, 70);
-    rect(700, 410, 20, 190);
-    rect(780, 500, 20, 100);
-    rect(900, 470, 20, 130);
+  //   // The vertical rect of cat tree
+  //   fill(181, 174, 153);
+  //   rect(100, 300, 20, 300);
+  //   rect(210, 350, 20, 250);
+  //   rect(290, 450, 20, 150);
+  //   rect(420, 500, 20, 100);
+  //   rect(500, 420, 20, 180);
+  //   rect(580, 530, 20, 70);
+  //   rect(700, 410, 20, 190);
+  //   rect(780, 500, 20, 100);
+  //   rect(900, 470, 20, 130);
 
-    // The horizontal rect of cat tree
-    fill(217, 217, 217);
-    rect(60, 300, 100, 20);
-    rect(170, 350, 100, 20);
-    rect(250, 430, 100, 20);
-    rect(380, 500, 100, 20);
-    rect(460, 400, 100, 20);
-    rect(540, 510, 100, 20);
-    rect(660, 410, 100, 20);
-    rect(740, 480, 100, 20);
-    rect(860, 450, 100, 20);
+  //   // The horizontal rect of cat tree
+  //   fill(217, 217, 217);
+  //   rect(60, 300, 100, 20);
+  //   rect(170, 350, 100, 20);
+  //   rect(250, 430, 100, 20);
+  //   rect(380, 500, 100, 20);
+  //   rect(460, 400, 100, 20);
+  //   rect(540, 510, 100, 20);
+  //   rect(660, 410, 100, 20);
+  //   rect(740, 480, 100, 20);
+  //   rect(860, 450, 100, 20);
 
-    // Displaying clouds in the sky
-    clouds();
-    clouds(600, 90, 1);
-    clouds(250, 100, 0.7);
-  }
+  //   // Displaying clouds in the sky
+  //   clouds();
+  //   clouds(600, 90, 1);
+  //   clouds(250, 100, 0.7);
+  // }
 
   if (state === "start") {
     startScreen();

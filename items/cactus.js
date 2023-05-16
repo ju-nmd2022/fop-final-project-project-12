@@ -1,5 +1,6 @@
 export function cactus(x, y, s) {
   push();
+  translate(-35, -45);
   translate(x, y);
   scale(s);
   noStroke();
