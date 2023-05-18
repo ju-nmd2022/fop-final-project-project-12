@@ -28,10 +28,25 @@ function clouds(x, y, s) {
   pop();
 }
 
+function heart(x, y) {
+  push();
+  noStroke();
+  fill(202, 0, 0);
+  translate(x, y);
+  translate(-100, -100);
+  ellipse(95, 100, 13, 15);
+  ellipse(105, 100, 13, 15);
+  triangle(90, 105, 100, 115, 110, 105);
+  triangle(100, 105, 100, 115, 90, 105);
+  pop();
+}
+
 function doorToNextLevel() {
   fill(0, 0, 0);
   rect(840, 500, 50, 100);
 }
+
+//#region Objects
 
 //#region Cat tree objects for level 1
 let catTree1 = {
@@ -376,6 +391,10 @@ let door = {
   hasOpened: false,
 };
 
+//#endregion
+
+//#region Arrays
+
 // Array for items to pick up
 let mouseAndFishArray = [
   mouseItem1,
@@ -419,6 +438,10 @@ let itemPickedUp = [];
 // Array for cactus
 let cactusArray = [cactus1, cactus2, cactus3, cactus4];
 
+//#endregion
+
+//#region Variables
+
 const JUMP_HEIGHT = 16;
 const CAT_SPEED = 3;
 const CAT_HEIGHT = 60;
@@ -441,6 +464,8 @@ let lives = 9;
 let enemyMessageShow = false;
 
 let pressedCharacterButton;
+
+//#endregion
 
 //#region Functionality
 
@@ -567,19 +592,6 @@ function drawHearts() {
       heart(x, y);
     }
   }
-}
-
-function heart(x, y) {
-  push();
-  noStroke();
-  fill(202, 0, 0);
-  translate(x, y);
-  translate(-100, -100);
-  ellipse(95, 100, 13, 15);
-  ellipse(105, 100, 13, 15);
-  triangle(90, 105, 100, 115, 110, 105);
-  triangle(100, 105, 100, 115, 90, 105);
-  pop();
 }
 
 //#endregion
