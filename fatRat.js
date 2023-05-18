@@ -205,7 +205,7 @@ let cactus2 = {
 
 //#endregion
 
-let door1 = {
+let door = {
   id: "door1",
   type: "door",
   posX: 840,
@@ -236,9 +236,6 @@ let catTreeArray = [
 
 let catTreeArrayLevelTwo = [catTreeLevelTwo1];
 
-let lifeArray = ["❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️", "❤️"];
-let dieArray = [];
-
 let itemPickedUp = [];
 
 // Array for cactus
@@ -260,9 +257,8 @@ let s = 0.8;
 
 let state = "start";
 let character = null;
-let characterButtonIsClicked = false;
 
-let inventoryItemWidth = 60;
+let lives = 9;
 
 //#region Functionality
 
@@ -291,16 +287,6 @@ function catTreeDisplay() {
   });
 }
 
-// function catTreeDisplayLevelTwo() {
-//   catTreeArrayLevelTwo.forEach((item) => {
-//     fill(217, 217, 217);
-//     rect(item.posX, item.posY, 100, 20);
-
-//     fill(181, 174, 153);
-//     rect(item.posXVertical, item.posYVertical, 20, item.height);
-//   });
-// }
-
 function opacityMouseAndFish() {
   mouseAndFishArray.forEach((item, index) => {
     if (item.hasPickedUp) {
@@ -308,8 +294,6 @@ function opacityMouseAndFish() {
         mouse(index * 50, 0, 1, 255);
       } else if (item.type === "fish") {
         fish(index * 50, 0, 1, 255);
-      } else {
-        // console.log("invalid item type");
       }
     } else {
       if (item.type === "mouse") {
@@ -318,13 +302,10 @@ function opacityMouseAndFish() {
       } else if (item.type === "fish") {
         fish(index * 50, 0, 1, 50);
         fish(item.posX, item.posY, 1, 255);
-      } else {
-        // console.log("invalid item type");
       }
       isCatWithin(item.posX, item.posX + 50, item.posY, item.posY + 50, () => {
         item.hasPickedUp = true;
         itemPickedUp.push(item);
-        // console.log("hit the fish");
       });
     }
   });
@@ -332,55 +313,77 @@ function opacityMouseAndFish() {
   if (itemPickedUp.length === 6) {
     doorToNextLevel();
 
-    isCatWithin(
-      door1.posX,
-      door1.posX + 50,
-      door1.posY,
-      door1.posY + 100,
-      () => {
-        door1.hasOpened = true;
-        console.log("nylevel");
-        state = "levelTwo";
-        // catTreeDisplayLevelTwo();
-      }
-    );
+    isCatWithin(door.posX, door.posX + 50, door.posY, door.posY + 100, () => {
+      door.hasOpened = true;
+      console.log("nylevel");
+      state = "levelTwo";
+      // catTreeDisplayLevelTwo();
+    });
   }
 }
 
 function walkedInOnCactus() {
   cactusArray.forEach((enemy) => {
-    if (enemy.hasLandedOn) {
-      fill(255, 206, 253);
-      rect(350, 200, 300, 100);
-      fill(0, 0, 0);
-      textSize(15);
-      textAlign(CENTER, CENTER);
-      text(
-        "Be careful! Do not walk in to the cactus.",
-        350 + 300 / 2,
-        200 + 100 / 2
-      );
-      text("You only have nine lives.", 350 + 250 / 2, 230 + 100 / 2);
-      lifeArray.push(dieArray);
-    } else {
-      cactus(enemy.posX, enemy.posY, 0.3);
-    }
+    cactus(enemy.posX, enemy.posY, 0.3);
+    // if (enemy.hasLandedOn) {
+    //   fill(255, 206, 253);
+    //   rect(350, 200, 300, 100);
+    //   fill(0, 0, 0);
+    //   textSize(15);
+    //   textAlign(CENTER, CENTER);
+    //   text(
+    //     "Be careful! Do not walk in to the cactus.",
+    //     350 + 300 / 2,
+    //     200 + 100 / 2
+    //   );
+    //   text("You only have nine lives.", 350 + 250 / 2, 230 + 100 / 2);
+    // } else {
+    // }
     isCatWithin(
       enemy.posX,
       enemy.posX + 50,
       enemy.posY,
       enemy.posY + 200,
       () => {
-        enemy.hasLandedOn = true;
+        hitCactus();
       }
     );
   });
 }
 
-// function nineLives() {
-//   if (cactus1.hasLandedOn || cactus2.hasLandedOn) {
-//   }
-// }
+function hitCactus() {
+  lives -= 1;
+
+  if (lives > 0) {
+    catX = 0;
+    catY = 600 - CAT_HEIGHT;
+  } else {
+    state = "lose";
+  }
+}
+
+function drawHearts() {
+  for (let i = 1; i <= 9; i++) {
+    let x = 970 + (i - 1) * -30;
+    let y = 20;
+    if (lives >= i) {
+      heart(x, y);
+    }
+  }
+}
+
+function heart(x, y) {
+  push();
+  noStroke();
+  fill(202, 0, 0);
+  translate(x, y);
+  translate(-100, -100);
+  ellipse(95, 100, 13, 15);
+  ellipse(105, 100, 13, 15);
+  triangle(90, 105, 100, 115, 110, 105);
+  triangle(100, 105, 100, 115, 90, 105);
+  pop();
+}
 
 //#endregion
 
@@ -613,7 +616,7 @@ window.draw = () => {
       default:
         console.log("no character chosen");
     }
-
+    drawHearts();
     // Displaying clouds in the sky
     clouds();
     clouds(600, 90, 1);
