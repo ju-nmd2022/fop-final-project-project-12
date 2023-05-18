@@ -436,7 +436,7 @@ function isCatWithin(x1, x2, y1, y2, callback) {
   }
 }
 
-function catTreeDisplay() {
+function drawCatTree() {
   allCatTreesArray.forEach((item) => {
     if (item.level == level) {
       fill(217, 217, 217);
@@ -770,7 +770,7 @@ window.draw = () => {
 
     // To walk on ground
     isCatWithin(-200, 1200, 600, 700);
-    catTreeDisplay();
+    drawCatTree();
 
     if (keyIsDown(RIGHT_ARROW)) {
       speedX = CAT_SPEED;
