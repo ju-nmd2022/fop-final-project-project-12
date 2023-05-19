@@ -42,9 +42,9 @@ function heart(x, y) {
 }
 
 function doorToNextLevel() {
-  fill(139,69,19);
+  fill(139, 69, 19);
   rect(840, 500, 50, 100);
-  fill(218,165,32);
+  fill(218, 165, 32);
   ellipse(845, 550, 5);
 }
 
@@ -217,6 +217,80 @@ let catTreeLevelTwo9 = {
 };
 //#endregion
 
+//#region Cat Tree Object for level 3
+let catTreeLevelThree1 = {
+  posX: 60,
+  posY: 530,
+  posXVertical: 100,
+  posYVertical: 550,
+  height: 50,
+  level: 3,
+};
+
+let catTreeLevelThree2 = {
+  posX: 270,
+  posY: 320,
+  posXVertical: 310,
+  posYVertical: 340,
+  height: 260,
+  level: 3,
+};
+
+let catTreeLevelThree3 = {
+  posX: 190,
+  posY: 470,
+  posXVertical: 230,
+  posYVertical: 490,
+  height: 110,
+  level: 3,
+};
+
+let catTreeLevelThree4 = {
+  posX: 440,
+  posY: 400,
+  posXVertical: 480,
+  posYVertical: 420,
+  height: 180,
+  level: 3,
+};
+
+let catTreeLevelThree5 = {
+  posX: 600,
+  posY: 500,
+  posXVertical: 640,
+  posYVertical: 520,
+  height: 80,
+  level: 3,
+};
+
+let catTreeLevelThree6 = {
+  posX: 650,
+  posY: 360,
+  posXVertical: 690,
+  posYVertical: 380,
+  height: 220,
+  level: 3,
+};
+
+let catTreeLevelThree7 = {
+  posX: 800,
+  posY: 310,
+  posXVertical: 840,
+  posYVertical: 330,
+  height: 270,
+  level: 3,
+};
+
+let catTreeLevelThree8 = {
+  posX: 900,
+  posY: 550,
+  posXVertical: 940,
+  posYVertical: 570,
+  height: 30,
+  level: 3,
+};
+//#endregion
+
 //#region Item objects
 let mouseItem1 = {
   type: "mouse",
@@ -266,6 +340,30 @@ let mouseItem6 = {
   level: 2,
 };
 
+let mouseItem7 = {
+  type: "mouse",
+  posX: 90,
+  posY: 500,
+  hasPickedUp: false,
+  level: 3,
+};
+
+let mouseItem8 = {
+  type: "mouse",
+  posX: 830,
+  posY: 280,
+  hasPickedUp: false,
+  level: 3,
+};
+
+let mouseItem9 = {
+  type: "mouse",
+  posX: 400,
+  posY: 575,
+  hasPickedUp: false,
+  level: 3,
+};
+
 let fishItem1 = {
   type: "fish",
   posX: 450,
@@ -313,6 +411,30 @@ let fishItem6 = {
   hasPickedUp: false,
   level: 2,
 };
+
+let fishItem7 = {
+  type: "fish",
+  posX: 300,
+  posY: 295,
+  hasPickedUp: false,
+  level: 3,
+};
+
+let fishItem8 = {
+  type: "fish",
+  posX: 900,
+  posY: 525,
+  hasPickedUp: false,
+  level: 3,
+};
+
+let fishItem9 = {
+  type: "fish",
+  posX: 450,
+  posY: 375,
+  hasPickedUp: false,
+  level: 3,
+};
 //#endregion
 
 //#region Cactus objects
@@ -339,6 +461,18 @@ let cactus4 = {
   posY: 505,
   level: 2,
 };
+
+let cactus5 = {
+  posX: 730,
+  posY: 505,
+  level: 3,
+};
+
+let cactus6 = {
+  posX: 320,
+  posY: 505,
+  level: 3,
+};
 //#endregion
 
 let door = {
@@ -359,12 +493,18 @@ let mouseAndFishArray = [
   mouseItem4,
   mouseItem5,
   mouseItem6,
+  mouseItem7,
+  mouseItem8,
+  mouseItem9,
   fishItem1,
   fishItem2,
   fishItem3,
   fishItem4,
   fishItem5,
   fishItem6,
+  fishItem7,
+  fishItem8,
+  fishItem9,
 ];
 
 let allCatTreesArray = [
@@ -387,12 +527,20 @@ let allCatTreesArray = [
   catTreeLevelTwo7,
   catTreeLevelTwo8,
   catTreeLevelTwo9,
+  catTreeLevelThree1,
+  catTreeLevelThree2,
+  catTreeLevelThree3,
+  catTreeLevelThree4,
+  catTreeLevelThree5,
+  catTreeLevelThree6,
+  catTreeLevelThree7,
+  catTreeLevelThree8,
 ];
 
 let itemPickedUp = [];
 
 // Array for cactus
-let cactusArray = [cactus1, cactus2, cactus3, cactus4];
+let cactusArray = [cactus1, cactus2, cactus3, cactus4, cactus5, cactus6];
 
 //#endregion
 
@@ -425,6 +573,7 @@ let pressedCharacterButton;
 
 //#region Functionality
 
+// Function letting you know if cat is on cat-tree or ground, so the cat can jump
 function isCatWithin(x1, x2, y1, y2, callback) {
   let newCatY = catY + CAT_HEIGHT;
   let newCatX = catX - 20;
@@ -451,6 +600,7 @@ function drawCatTree() {
 }
 
 function drawMouseAndFish() {
+  // to only show three mice and three fishes in the corner
   let placedItemCount = 0;
 
   mouseAndFishArray.forEach((item, index) => {
@@ -458,12 +608,14 @@ function drawMouseAndFish() {
       return;
     }
 
+    // when item is picked up they dissaper in the game and display in the corner
     if (item.hasPickedUp) {
       if (item.type === "mouse") {
         mouse(placedItemCount * 50, 0, 1, 255);
       } else if (item.type === "fish") {
         fish(placedItemCount * 50, 0, 1, 255);
       }
+      // items in game able to pick up
     } else {
       if (item.type === "mouse") {
         mouse(placedItemCount * 50, 0, 1, 50);
@@ -822,6 +974,7 @@ window.draw = () => {
     drawMouseAndFish();
     drawCactus();
 
+    // The following 11 lines of code was adapted from https://www.w3schools.com/js/js_switch.asp Accesed April 20, 2023
     switch (character) {
       case "fia":
         standingFia(catX, catY, catMirror, s);
@@ -922,16 +1075,16 @@ window.draw = () => {
   }
 
   if (state === "start") {
-    startScreen();
-  } else if (state === "info") {
-    infoScreen();
-  } else if (state === "choose") {
-    characterScreen();
-  } else if (state === "game") {
+    //   startScreen();
+    // } else if (state === "info") {
+    //   infoScreen();
+    // } else if (state === "choose") {
+    //   characterScreen();
+    // } else if (state === "game") {
     gameScreen();
-  } else if (state === "lose") {
-    loseScreen();
-  } else if (state === "win") {
-    winScreen();
+    // } else if (state === "lose") {
+    //   loseScreen();
+    // } else if (state === "win") {
+    //   winScreen();
   }
 };
