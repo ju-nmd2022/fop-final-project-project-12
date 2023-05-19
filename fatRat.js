@@ -627,6 +627,7 @@ function drawMouseAndFish() {
       isCatWithin(item.posX, item.posX + 50, item.posY, item.posY + 50, () => {
         item.hasPickedUp = true;
         itemPickedUp.push(item);
+        console.log(itemPickedUp.length);
       });
     }
     placedItemCount += 1;
@@ -653,6 +654,15 @@ function drawMouseAndFish() {
       catX = 30;
       catY = 600 - CAT_HEIGHT;
       catMirror = 1;
+    });
+  }
+
+  if (itemPickedUp.length === 18 && level == 3) {
+    doorToNextLevel();
+
+    isCatWithin(door.posX, door.posX + 50, door.posY, door.posY + 100, () => {
+      door.hasOpened = true;
+      state = "win";
     });
   }
 }
@@ -1070,21 +1080,43 @@ window.draw = () => {
     text("YOU DA BEST!!", 160, 200);
     text("WINNER, WINNER, WINNER!!", 160, 250);
 
+    if (
+      mouseIsPressed &&
+      mouseX > 650 &&
+      mouseX < 650 + 200 &&
+      mouseY > 490 &&
+      mouseY < 490 + 70 &&
+      state === "win"
+    ) {
+      restartGame();
+    }
+
+    if (
+      mouseIsPressed &&
+      mouseX > 250 &&
+      mouseX < 250 + 200 &&
+      mouseY > 490 &&
+      mouseY < 490 + 70 &&
+      state === "win"
+    ) {
+      thanksMessage();
+    }
+
     restartButton(600, 450, 200, 70);
     quitButton(200, 450, 200, 70);
   }
 
   if (state === "start") {
-    //   startScreen();
-    // } else if (state === "info") {
-    //   infoScreen();
-    // } else if (state === "choose") {
-    //   characterScreen();
-    // } else if (state === "game") {
+    startScreen();
+  } else if (state === "info") {
+    infoScreen();
+  } else if (state === "choose") {
+    characterScreen();
+  } else if (state === "game") {
     gameScreen();
-    // } else if (state === "lose") {
-    //   loseScreen();
-    // } else if (state === "win") {
-    //   winScreen();
+  } else if (state === "lose") {
+    loseScreen();
+  } else if (state === "win") {
+    winScreen();
   }
 };
