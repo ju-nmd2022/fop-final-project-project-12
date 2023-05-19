@@ -562,7 +562,7 @@ let s = 0.8;
 
 let state = "start";
 let character = null;
-let level = 4;
+let level = 1;
 
 let lives = 9;
 let enemyMessageShow = false;
