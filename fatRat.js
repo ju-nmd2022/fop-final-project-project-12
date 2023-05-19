@@ -42,8 +42,10 @@ function heart(x, y) {
 }
 
 function doorToNextLevel() {
-  fill(0, 0, 0);
+  fill(139,69,19);
   rect(840, 500, 50, 100);
+  fill(218,165,32);
+  ellipse(845, 550, 5);
 }
 
 //#region Objects
@@ -568,6 +570,22 @@ function drawHearts() {
   }
 }
 
+function restartButton(x, y, w, h) {
+  fill(255, 206, 253);
+  rect(x, y, w, h);
+  fill(0, 0, 0);
+  textSize(13);
+  text("RESTART GAME", 650, 490);
+}
+
+function quitButton(x, y, w, h) {
+  fill(255, 206, 253);
+  rect(x, y, w, h);
+  fill(0, 0, 0);
+  textSize(13);
+  text("QUIT GAME", 250, 490);
+}
+
 function restartGame() {
   catX = 30;
   catY = 600 - CAT_HEIGHT;
@@ -830,7 +848,77 @@ window.draw = () => {
   }
 
   function loseScreen() {
-    background(255, 0, 0);
+    state = "lose";
+
+    background(135, 206, 250);
+    noStroke();
+
+    fill(112, 209, 126);
+    rect(0, 600, 1000);
+
+    clouds();
+    clouds(600, 90, 1);
+    clouds(100, 100, 0.2);
+    clouds(250, 100, 0.7);
+
+    function thanksMessage() {
+      fill(255, 206, 253);
+      rect(350, 200, 300, 100);
+      fill(0, 0, 0);
+      textSize(15);
+      textAlign(CENTER, CENTER);
+      text("Thank you for playing!", 350 + 300 / 2, 200 + 100 / 2);
+      text("We'll hopefully meet again!", 350 + 250 / 2, 230 + 100 / 2);
+    }
+
+    restartButton(600, 450, 200, 70);
+    quitButton(200, 450, 200, 70);
+
+    if (
+      mouseIsPressed &&
+      mouseX > 650 &&
+      mouseX < 650 + 200 &&
+      mouseY > 490 &&
+      mouseY < 490 + 70 &&
+      state === "lose"
+    ) {
+      state = "start";
+      restartGame();
+    }
+
+    if (
+      mouseIsPressed &&
+      mouseX > 250 &&
+      mouseX < 250 + 200 &&
+      mouseY > 490 &&
+      mouseY < 490 + 70 &&
+      state === "lose"
+    ) {
+      thanksMessage();
+    }
+  }
+
+  function winScreen() {
+    state = "win";
+
+    background(135, 206, 250);
+    noStroke();
+
+    fill(112, 209, 126);
+    rect(0, 600, 1000);
+
+    clouds();
+    clouds(600, 90, 1);
+    clouds(100, 100, 0.2);
+    clouds(250, 100, 0.7);
+
+    fill(80, 80, 80);
+    textSize(50);
+    text("YOU DA BEST!!", 160, 200);
+    text("WINNER, WINNER, WINNER!!", 160, 250);
+
+    restartButton(600, 450, 200, 70);
+    quitButton(200, 450, 200, 70);
   }
 
   if (state === "start") {
@@ -843,5 +931,7 @@ window.draw = () => {
     gameScreen();
   } else if (state === "lose") {
     loseScreen();
+  } else if (state === "win") {
+    winScreen();
   }
 };
