@@ -562,7 +562,7 @@ let s = 0.8;
 
 let state = "start";
 let character = null;
-let level = 1;
+let level = 4;
 
 let lives = 9;
 let enemyMessageShow = false;
@@ -663,6 +663,7 @@ function drawMouseAndFish() {
     isCatWithin(door.posX, door.posX + 50, door.posY, door.posY + 100, () => {
       door.hasOpened = true;
       state = "win";
+      level = 4;
     });
   }
 }
@@ -1085,23 +1086,24 @@ window.draw = () => {
       mouseX > 650 &&
       mouseX < 650 + 200 &&
       mouseY > 490 &&
-      mouseY < 490 + 70 &&
+      mouseY < 490 - 70 &&
       state === "win"
     ) {
       restartGame();
     }
 
     if (
-      mouseIsPressed &&
+      mouseIsClicked &&
       mouseX > 250 &&
       mouseX < 250 + 200 &&
       mouseY > 490 &&
-      mouseY < 490 + 70 &&
+      mouseY < 490 - 70 &&
       state === "win"
     ) {
       thanksMessage();
     }
 
+    fatRat();
     restartButton(600, 450, 200, 70);
     quitButton(200, 450, 200, 70);
   }
