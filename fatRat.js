@@ -750,7 +750,7 @@ function restartButton(x, y, w, h) {
   rect(x, y, w, h);
   fill(0, 0, 0);
   textSize(13);
-  text("RESTART GAME", 250, 390);
+  text("RESTART GAME", 270, 390);
 }
 
 function quitButton(x, y, w, h) {
@@ -758,7 +758,7 @@ function quitButton(x, y, w, h) {
   rect(x, y, w, h);
   fill(0, 0, 0);
   textSize(13);
-  text("QUIT GAME", 250, 490);
+  text("QUIT GAME", 280, 490);
 }
 
 function restartGame() {
@@ -1044,8 +1044,8 @@ window.draw = () => {
 
     fill(80, 80, 80);
     textSize(50);
-    text("YOU LOST...", 330, 200);
-    text("BETTER LUCK NEXT TIME!!", 180, 250);
+    text("YOU LOST...", 230, 200);
+    text("BETTER LUCK NEXT TIME!!", 230, 250);
 
     function thanksMessage() {
       fill(255, 206, 253);
@@ -1104,8 +1104,8 @@ window.draw = () => {
 
     fill(80, 80, 80);
     textSize(50);
-    text("YOU DA BEST!!", 330, 200);
-    text("WINNER, WINNER, WINNER!!", 180, 250);
+    text("YOU DA BEST!!", 230, 200);
+    text("WINNER, WINNER, WINNER!!", 230, 250);
 
     restartButton(200, 350, 200, 70);
     quitButton(200, 450, 200, 70);
