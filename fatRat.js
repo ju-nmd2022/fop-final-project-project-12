@@ -1038,6 +1038,10 @@ window.draw = () => {
     clouds(100, 100, 0.2);
     clouds(250, 100, 0.7);
 
+    sittingTellus(350, 250, 2);
+    sittingFia(500, 250, 2);
+    sittingStella(650, 250, 2);
+
     fill(80, 80, 80);
     textSize(50);
     text("YOU LOST...", 330, 200);
@@ -1058,8 +1062,8 @@ window.draw = () => {
 
     if (
       mouseIsPressed &&
-      mouseX > 200 &&
-      mouseX < 200 + 200 &&
+      mouseX > 250 &&
+      mouseX < 250 + 200 &&
       mouseY > 350 &&
       mouseY < 350 + 70 &&
       state === "lose"
@@ -1072,8 +1076,8 @@ window.draw = () => {
       mouseIsPressed &&
       mouseX > 250 &&
       mouseX < 250 + 200 &&
-      mouseY > 490 &&
-      mouseY < 490 + 70 &&
+      mouseY > 450 &&
+      mouseY < 450 + 70 &&
       state === "lose"
     ) {
       thanksMessage();
@@ -1094,20 +1098,24 @@ window.draw = () => {
     clouds(100, 100, 0.2);
     clouds(250, 100, 0.7);
 
+    sittingTellus(350, 250, 2);
+    sittingFia(500, 250, 2);
+    sittingStella(650, 250, 2);
+
     fill(80, 80, 80);
     textSize(50);
     text("YOU DA BEST!!", 330, 200);
     text("WINNER, WINNER, WINNER!!", 180, 250);
 
-    restartButton(250, 390, 200, 70);
+    restartButton(200, 350, 200, 70);
     quitButton(200, 450, 200, 70);
 
     if (
       mouseIsPressed &&
-      mouseX > 600 &&
-      mouseX < 600 + 200 &&
-      mouseY > 450 &&
-      mouseY < 450 + 70 &&
+      mouseX > 200 &&
+      mouseX < 200 + 200 &&
+      mouseY > 350 &&
+      mouseY < 350 + 70 &&
       state === "win"
     ) {
       restartGame();
