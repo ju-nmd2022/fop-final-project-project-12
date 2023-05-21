@@ -603,7 +603,7 @@ function drawMouseAndFish() {
   // to only show three mice and three fishes in the corner
   let placedItemCount = 0;
 
-  mouseAndFishArray.forEach((item, index) => {
+  mouseAndFishArray.forEach((item) => {
     if (item.level != level) {
       return;
     }
@@ -632,40 +632,6 @@ function drawMouseAndFish() {
     }
     placedItemCount += 1;
   });
-
-  if (itemPickedUp.length === 6 && level == 1) {
-    doorToNextLevel();
-
-    isCatWithin(door.posX, door.posX + 50, door.posY, door.posY + 100, () => {
-      door.hasOpened = true;
-      level = 2;
-      catX = 30;
-      catY = 600 - CAT_HEIGHT;
-      catMirror = 1;
-    });
-  }
-
-  if (itemPickedUp.length === 12 && level == 2) {
-    doorToNextLevel();
-
-    isCatWithin(door.posX, door.posX + 50, door.posY, door.posY + 100, () => {
-      door.hasOpened = true;
-      level = 3;
-      catX = 30;
-      catY = 600 - CAT_HEIGHT;
-      catMirror = 1;
-    });
-  }
-
-  if (itemPickedUp.length === 18 && level == 3) {
-    doorToNextLevel();
-
-    isCatWithin(door.posX, door.posX + 50, door.posY, door.posY + 100, () => {
-      door.hasOpened = true;
-      state = "win";
-      level = 4;
-    });
-  }
 }
 
 function drawEnemyMessage() {
@@ -730,6 +696,52 @@ function drawHearts() {
     if (lives >= i) {
       heart(x, y);
     }
+  }
+}
+
+function levels() {
+  if (itemPickedUp.length === 6 && level == 1) {
+    doorToNextLevel();
+
+    isCatWithin(door.posX, door.posX + 50, door.posY, door.posY + 100, () => {
+      door.hasOpened = true;
+      level = 2;
+      catX = 30;
+      catY = 600 - CAT_HEIGHT;
+      catMirror = 1;
+    });
+  }
+
+  if (itemPickedUp.length === 12 && level == 2) {
+    doorToNextLevel();
+
+    isCatWithin(door.posX, door.posX + 50, door.posY, door.posY + 100, () => {
+      door.hasOpened = true;
+      level = 3;
+      catX = 30;
+      catY = 600 - CAT_HEIGHT;
+      catMirror = 1;
+    });
+  }
+
+  if (itemPickedUp.length === 18 && level == 3) {
+    doorToNextLevel();
+
+    isCatWithin(door.posX, door.posX + 50, door.posY, door.posY + 100, () => {
+      door.hasOpened = true;
+      level = 4;
+      catX = 30;
+      catY = 600 - CAT_HEIGHT;
+      catMirror = 1;
+    });
+  }
+
+  if (level == 4) {
+    fatRat(800, 500, 0.5);
+
+    isCatWithin(800, 800 + 100, 500, 500 + 200, () => {
+      state = "win";
+    });
   }
 }
 
@@ -984,6 +996,7 @@ window.draw = () => {
 
     drawMouseAndFish();
     drawCactus();
+    levels();
 
     // The following 11 lines of code was adapted from https://www.w3schools.com/js/js_switch.asp Accesed April 20, 2023
     switch (character) {
@@ -1081,31 +1094,30 @@ window.draw = () => {
     text("YOU DA BEST!!", 160, 200);
     text("WINNER, WINNER, WINNER!!", 160, 250);
 
-    if (
-      mouseIsPressed &&
-      mouseX > 650 &&
-      mouseX < 650 + 200 &&
-      mouseY > 490 &&
-      mouseY < 490 - 70 &&
-      state === "win"
-    ) {
-      restartGame();
-    }
-
-    if (
-      mouseIsClicked &&
-      mouseX > 250 &&
-      mouseX < 250 + 200 &&
-      mouseY > 490 &&
-      mouseY < 490 - 70 &&
-      state === "win"
-    ) {
-      thanksMessage();
-    }
-
-    fatRat();
     restartButton(600, 450, 200, 70);
     quitButton(200, 450, 200, 70);
+
+    if (
+      mouseIsPressed &&
+      mouseX > 600 &&
+      mouseX < 600 + 200 &&
+      mouseY > 450 &&
+      mouseY < 450 + 70 &&
+      state === "win"
+    ) {
+      // restartGame();
+    }
+
+    if (
+      mouseIsPressed &&
+      mouseX > 200 &&
+      mouseX < 200 + 200 &&
+      mouseY > 450 &&
+      mouseY < 450 + 70 &&
+      state === "win"
+    ) {
+      // thanksMessage();
+    }
   }
 
   if (state === "start") {

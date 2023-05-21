@@ -1,7 +1,11 @@
 export function fatRat(x, y, s) {
   push();
+  translate(-120, -100);
   translate(x, y);
   scale(s);
+
+  scale(-1, 1);
+  translate(-650, 0);
 
   noStroke();
 
@@ -76,6 +80,5 @@ export function fatRat(x, y, s) {
 
   fill(255, 255, 255);
   ellipse(294, 178, 3);
-
   pop();
 }
