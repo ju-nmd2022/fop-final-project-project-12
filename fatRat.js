@@ -750,7 +750,7 @@ function restartButton(x, y, w, h) {
   rect(x, y, w, h);
   fill(0, 0, 0);
   textSize(13);
-  text("RESTART GAME", 650, 490);
+  text("RESTART GAME", 250, 390);
 }
 
 function quitButton(x, y, w, h) {
@@ -1038,6 +1038,11 @@ window.draw = () => {
     clouds(100, 100, 0.2);
     clouds(250, 100, 0.7);
 
+    fill(80, 80, 80);
+    textSize(50);
+    text("YOU LOST...", 330, 200);
+    text("BETTER LUCK NEXT TIME!!", 180, 250);
+
     function thanksMessage() {
       fill(255, 206, 253);
       rect(350, 200, 300, 100);
@@ -1048,15 +1053,15 @@ window.draw = () => {
       text("We'll hopefully meet again!", 350 + 250 / 2, 230 + 100 / 2);
     }
 
-    restartButton(600, 450, 200, 70);
+    restartButton(200, 350, 200, 70);
     quitButton(200, 450, 200, 70);
 
     if (
       mouseIsPressed &&
-      mouseX > 650 &&
-      mouseX < 650 + 200 &&
-      mouseY > 490 &&
-      mouseY < 490 + 70 &&
+      mouseX > 200 &&
+      mouseX < 200 + 200 &&
+      mouseY > 350 &&
+      mouseY < 350 + 70 &&
       state === "lose"
     ) {
       state = "start";
@@ -1091,10 +1096,10 @@ window.draw = () => {
 
     fill(80, 80, 80);
     textSize(50);
-    text("YOU DA BEST!!", 160, 200);
-    text("WINNER, WINNER, WINNER!!", 160, 250);
+    text("YOU DA BEST!!", 330, 200);
+    text("WINNER, WINNER, WINNER!!", 180, 250);
 
-    restartButton(600, 450, 200, 70);
+    restartButton(250, 390, 200, 70);
     quitButton(200, 450, 200, 70);
 
     if (
@@ -1105,7 +1110,7 @@ window.draw = () => {
       mouseY < 450 + 70 &&
       state === "win"
     ) {
-      // restartGame();
+      restartGame();
     }
 
     if (
@@ -1116,7 +1121,7 @@ window.draw = () => {
       mouseY < 450 + 70 &&
       state === "win"
     ) {
-      // thanksMessage();
+      thanksMessage();
     }
   }
 
