@@ -12,42 +12,6 @@ import { fish } from "./items/fish.js";
 import { mouse } from "./items/mouse.js";
 import { fatRat } from "./items/rat.js";
 
-function clouds(x, y, s) {
-  push();
-  translate(x, y);
-  scale(s);
-  fill(255, 255, 255);
-  ellipse(100, 100, 70, 50);
-  ellipse(120, 130, 80, 70);
-  ellipse(165, 150, 70, 40);
-  ellipse(160, 100, 80);
-  ellipse(220, 130, 100, 60);
-  ellipse(220, 100, 90, 70);
-  ellipse(165, 80, 70, 50);
-  ellipse(130, 80, 60, 40);
-  pop();
-}
-
-function heart(x, y) {
-  push();
-  noStroke();
-  fill(202, 0, 0);
-  translate(x, y);
-  translate(-100, -100);
-  ellipse(95, 100, 13, 15);
-  ellipse(105, 100, 13, 15);
-  triangle(90, 105, 100, 115, 110, 105);
-  triangle(100, 105, 100, 115, 90, 105);
-  pop();
-}
-
-function doorToNextLevel() {
-  fill(139, 69, 19);
-  rect(840, 500, 50, 100);
-  fill(218, 165, 32);
-  ellipse(845, 550, 5);
-}
-
 //#region Objects
 
 //#region Cat tree objects for level 1
@@ -573,6 +537,67 @@ let pressedCharacterButton;
 
 //#region Functionality
 
+function clouds(x, y, s) {
+  push();
+  translate(x, y);
+  scale(s);
+  noStroke();
+  fill(255, 255, 255);
+  ellipse(100, 100, 70, 50);
+  ellipse(120, 130, 80, 70);
+  ellipse(165, 150, 70, 40);
+  ellipse(160, 100, 80);
+  ellipse(220, 130, 100, 60);
+  ellipse(220, 100, 90, 70);
+  ellipse(165, 80, 70, 50);
+  ellipse(130, 80, 60, 40);
+  pop();
+}
+
+function heart(x, y) {
+  push();
+  noStroke();
+  fill(202, 0, 0);
+  translate(x, y);
+  translate(-100, -100);
+  ellipse(95, 100, 13, 15);
+  ellipse(105, 100, 13, 15);
+  triangle(90, 105, 100, 115, 110, 105);
+  triangle(100, 105, 100, 115, 90, 105);
+  pop();
+}
+
+function doorToNextLevel() {
+  push();
+  noStroke();
+  fill(139, 69, 19);
+  rect(840, 500, 50, 100);
+  fill(218, 165, 32);
+  ellipse(845, 550, 5);
+  pop();
+}
+
+function nextButton(x, y, w, h) {
+  push();
+  noStroke();
+  fill(255, 206, 253);
+  rect(x, y, w, h);
+  triangle(930, 500, 980, 535, 930, 570);
+  pop();
+}
+
+function characterButton(x, y, w, h) {
+  push();
+  noStroke();
+  fill(255, 206, 253);
+  rect(x, y, w, h);
+  fill(0, 0, 0);
+  textSize(13);
+  text("CHOOSE YOUR CHARACTER", 405, 480);
+  text("Melody from 'Super Smash Bros'", 405, 500);
+  pop();
+}
+
 // Function letting you know if cat is on cat-tree or ground, so the cat can jump
 function isCatWithin(x1, x2, y1, y2, callback) {
   let newCatY = catY + CAT_HEIGHT;
@@ -590,11 +615,14 @@ function isCatWithin(x1, x2, y1, y2, callback) {
 function drawCatTree() {
   allCatTreesArray.forEach((item) => {
     if (item.level == level) {
+      push();
+      noStroke();
       fill(217, 217, 217);
       rect(item.posX, item.posY, 100, 20);
       fill(181, 174, 153);
       rect(item.posXVertical, item.posYVertical, 20, item.height);
       isCatWithin(item.posX, item.posX + 100, item.posY, item.posY + 20);
+      pop();
     }
   });
 }
@@ -636,17 +664,18 @@ function drawMouseAndFish() {
 
 function drawEnemyMessage() {
   if (enemyMessageShow == true) {
+    push();
+    noStroke();
     fill(255, 206, 253);
     rect(350, 200, 300, 100);
     fill(0, 0, 0);
     textSize(15);
     textAlign(CENTER, CENTER);
-    text(
-      "Be careful! Do not walk in to the cactus.",
-      350 + 300 / 2,
-      200 + 100 / 2
-    );
-    text("You only have nine lives.", 350 + 250 / 2, 230 + 100 / 2);
+    let centerX = 350 + 300 / 2;
+    let centerY = 200 + 100 / 2;
+    text("Be careful! Do not walk in to the cactus.", centerX, centerY - 10);
+    text("You only have nine lives.", centerX, centerY + 10);
+    pop();
   }
 }
 
@@ -747,36 +776,48 @@ function levels() {
 
 function restartButton(x, y, w, h) {
   push();
+  noStroke();
   fill(255, 206, 253);
   rect(x, y, w, h);
   fill(0, 0, 0);
   textSize(13);
-  text("RESTART GAME", 270, 390);
+  textAlign(CENTER, CENTER);
+  let centerX = x + w / 2;
+  let centerY = y + h / 2;
+  text("RESTART GAME", centerX, centerY);
   pop();
 }
 
 function quitButton(x, y, w, h) {
   push();
+  noStroke();
   fill(255, 206, 253);
   rect(x, y, w, h);
   fill(0, 0, 0);
   textSize(13);
-  text("QUIT GAME", 280, 490);
+  textAlign(CENTER, CENTER);
+  let centerX = x + w / 2;
+  let centerY = y + h / 2;
+  text("QUIT GAME", centerX, centerY);
   pop();
 }
 
-function restartGame() {
+function resetGame() {
   catX = 30;
   catY = 600 - CAT_HEIGHT;
   lives = 9;
   level = 1;
   itemPickedUp.length = 0;
-  state = "game";
   catMirror = 1;
 
   mouseAndFishArray.forEach((item) => {
     item.hasPickedUp = false;
   });
+}
+
+function restartGame() {
+  resetGame();
+  state = "game";
 }
 
 //#endregion
@@ -785,6 +826,7 @@ window.draw = () => {
   // Screens
   function startScreen() {
     state = "start";
+    push();
     background(135, 206, 250);
     noStroke();
 
@@ -801,17 +843,14 @@ window.draw = () => {
     fill(80, 80, 80);
     textSize(50);
     textStyle(BOLD);
-    text("THE GREAT SEARCH", 200, 200);
-    text("FOR THE", 490, 260);
+    let centerX = 1000 / 2;
+    let centerY = 700 / 2;
+    text("THE GREAT SEARCH", centerX - 300, centerY - 155);
+    text("FOR THE", centerX, centerY - 90);
     textSize(150);
     textStyle(ITALIC);
-    text("FAT RAT", 170, 390);
-
-    function nextButton(x, y, w, h) {
-      fill(255, 206, 253);
-      rect(x, y, w, h);
-      triangle(930, 500, 980, 535, 930, 570);
-    }
+    text("FAT RAT", centerX - 320, centerY + 40);
+    pop();
 
     nextButton(770, 520, 170, 30);
     cactus(50, 450, 0.5);
@@ -832,7 +871,7 @@ window.draw = () => {
 
   function infoScreen() {
     state = "info";
-
+    push();
     background(135, 206, 250);
     noStroke();
 
@@ -867,15 +906,7 @@ window.draw = () => {
     text("Use the left and right", 90, 400);
     text("arrows to stear.", 90, 420);
     text("And spacebar to jump", 90, 440);
-
-    function characterButton(x, y, w, h) {
-      fill(255, 206, 253);
-      rect(x, y, w, h);
-      fill(0, 0, 0);
-      textSize(13);
-      text("CHOOSE YOUR CHARACTER", 405, 480);
-      text("Melody from 'Super Smash Bros'", 405, 500);
-    }
+    pop();
 
     characterButton(400, 450, 200, 70);
 
@@ -894,6 +925,7 @@ window.draw = () => {
 
   function characterScreen() {
     state = "choose";
+    push();
     background(135, 206, 250);
     noStroke();
 
@@ -917,6 +949,7 @@ window.draw = () => {
     text("Fia", 280, 400);
     text("Tellus", 470, 400);
     text("Stella", 670, 400);
+    pop();
 
     if (pressedCharacterButton + 1000 < Date.now()) {
       if (
@@ -955,12 +988,14 @@ window.draw = () => {
 
   function gameScreen() {
     state = "game";
+    push();
     noStroke();
     background(135, 206, 250);
 
     // Grass
     fill(112, 209, 126);
     rect(0, 600, 1000);
+    pop();
 
     speedY += gravity;
     catX = catX + speedX;
@@ -1031,6 +1066,7 @@ window.draw = () => {
 
   function loseScreen() {
     state = "lose";
+    push();
     background(135, 206, 250);
     noStroke();
 
@@ -1049,8 +1085,11 @@ window.draw = () => {
 
     fill(80, 80, 80);
     textSize(50);
-    text("YOU LOST...", 500, 200);
-    text("BETTER LUCK NEXT TIME!!", 500, 250);
+    let centerX = 1000 / 2;
+    let centerY = 700 / 2;
+    text("YOU LOST...", centerX - 300, centerY - 100);
+    text("BETTER LUCK NEXT TIME!!", centerX - 300, centerY - 30);
+    pop();
 
     restartButton(200, 350, 200, 70);
     quitButton(200, 450, 200, 70);
@@ -1074,13 +1113,14 @@ window.draw = () => {
       mouseY < 450 + 70 &&
       state === "lose"
     ) {
+      resetGame();
       state = "start";
     }
   }
 
   function winScreen() {
     state = "win";
-
+    push();
     background(135, 206, 250);
     noStroke();
 
@@ -1109,8 +1149,12 @@ window.draw = () => {
 
     fill(80, 80, 80);
     textSize(50);
-    text("YOU DA BEST!!", 300, 200);
-    text("WINNER, WINNER, WINNER!!", 300, 250);
+    textAlign(CENTER);
+    let centerX = 1000 / 2;
+    let centerY = 700 / 2;
+    text("YOU DA BEST!!", centerX, centerY - 70);
+    text("WINNER, WINNER, WINNER!!", centerX, centerY - 20);
+    pop();
 
     restartButton(200, 350, 200, 70);
     quitButton(200, 450, 200, 70);
@@ -1134,6 +1178,7 @@ window.draw = () => {
       mouseY < 450 + 70 &&
       state === "win"
     ) {
+      resetGame();
       state = "start";
     }
   }
