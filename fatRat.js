@@ -1109,8 +1109,8 @@ window.draw = () => {
 
     fill(80, 80, 80);
     textSize(50);
-    text("YOU DA BEST!!", 230, 200);
-    text("WINNER, WINNER, WINNER!!", 230, 250);
+    text("YOU DA BEST!!", 300, 200);
+    text("WINNER, WINNER, WINNER!!", 300, 250);
 
     restartButton(200, 350, 200, 70);
     quitButton(200, 450, 200, 70);
