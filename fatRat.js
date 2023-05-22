@@ -746,19 +746,23 @@ function levels() {
 }
 
 function restartButton(x, y, w, h) {
+  push();
   fill(255, 206, 253);
   rect(x, y, w, h);
   fill(0, 0, 0);
   textSize(13);
   text("RESTART GAME", 270, 390);
+  pop();
 }
 
 function quitButton(x, y, w, h) {
+  push();
   fill(255, 206, 253);
   rect(x, y, w, h);
   fill(0, 0, 0);
   textSize(13);
   text("QUIT GAME", 280, 490);
+  pop();
 }
 
 function restartGame() {
@@ -766,6 +770,7 @@ function restartGame() {
   catY = 600 - CAT_HEIGHT;
   lives = 9;
   level = 1;
+  itemPickedUp.length = 0;
   state = "game";
   catMirror = 1;
 
@@ -1026,7 +1031,6 @@ window.draw = () => {
 
   function loseScreen() {
     state = "lose";
-
     background(135, 206, 250);
     noStroke();
 
@@ -1038,24 +1042,15 @@ window.draw = () => {
     clouds(100, 100, 0.2);
     clouds(250, 100, 0.7);
 
-    sittingTellus(350, 250, 2);
-    sittingFia(500, 250, 2);
-    sittingStella(650, 250, 2);
+    fill(65, 105, 225);
+    ellipse(820, 620, 200, 50);
+    fatRat(650, 390, 0.8);
+    rect(812, 439, 5, 200);
 
     fill(80, 80, 80);
     textSize(50);
-    text("YOU LOST...", 230, 200);
-    text("BETTER LUCK NEXT TIME!!", 230, 250);
-
-    function thanksMessage() {
-      fill(255, 206, 253);
-      rect(350, 200, 300, 100);
-      fill(0, 0, 0);
-      textSize(15);
-      textAlign(CENTER, CENTER);
-      text("Thank you for playing!", 350 + 300 / 2, 200 + 100 / 2);
-      text("We'll hopefully meet again!", 350 + 250 / 2, 230 + 100 / 2);
-    }
+    text("YOU LOST...", 500, 200);
+    text("BETTER LUCK NEXT TIME!!", 500, 250);
 
     restartButton(200, 350, 200, 70);
     quitButton(200, 450, 200, 70);
@@ -1068,7 +1063,6 @@ window.draw = () => {
       mouseY < 350 + 70 &&
       state === "lose"
     ) {
-      state = "start";
       restartGame();
     }
 
@@ -1080,7 +1074,7 @@ window.draw = () => {
       mouseY < 450 + 70 &&
       state === "lose"
     ) {
-      thanksMessage();
+      state = "start";
     }
   }
 
@@ -1099,8 +1093,19 @@ window.draw = () => {
     clouds(250, 100, 0.7);
 
     sittingTellus(350, 250, 2);
+    triangle(535, 430, 565, 430, 550, 370);
+    fill(0, 0, 0);
+    ellipse(550, 370, 10);
     sittingFia(500, 250, 2);
+    fill(255, 206, 253);
+    triangle(685, 430, 715, 430, 700, 370);
+    fill(0, 0, 0);
+    ellipse(700, 370, 10);
     sittingStella(650, 250, 2);
+    fill(255, 206, 2);
+    triangle(835, 430, 865, 430, 850, 370);
+    fill(0, 0, 0);
+    ellipse(850, 370, 10);
 
     fill(80, 80, 80);
     textSize(50);
@@ -1129,7 +1134,7 @@ window.draw = () => {
       mouseY < 450 + 70 &&
       state === "win"
     ) {
-      thanksMessage();
+      state = "start";
     }
   }
 
