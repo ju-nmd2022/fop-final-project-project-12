@@ -593,8 +593,7 @@ function characterButton(x, y, w, h) {
   rect(x, y, w, h);
   fill(0, 0, 0);
   textSize(13);
-  text("CHOOSE YOUR CHARACTER", 405, 480);
-  text("Melody from 'Super Smash Bros'", 405, 500);
+  text("CHOOSE YOUR CHARACTER", 408, 488);
   pop();
 }
 
@@ -767,6 +766,10 @@ function levels() {
 
   if (level == 4) {
     fatRat(800, 500, 0.5);
+    fill(80, 80, 80);
+    textSize(50);
+    text("YOU FOUND HIM,", 200, 300);
+    text("RUN TO THE FAT RAT", 200, 400);
 
     isCatWithin(800, 800 + 100, 500, 500 + 200, () => {
       state = "win";
@@ -887,28 +890,34 @@ window.draw = () => {
     fill(80, 80, 80);
     textSize(20);
     textStyle(BOLD);
-    text("There is a fat rat lost in ", 550, 100);
-    text("the jungle of cat trees. Choose", 550, 150);
-    text("between the cats Fia, Tellus & Stella", 550, 200);
-    text("and try to help the fat rat find home.", 550, 250);
-    text("Make the cat get through the ?levels.", 550, 350);
-    text("But look out for the cacutuses...", 550, 400);
+    text("There is a fat rat lost in ", 100, 100);
+    text("the jungle of cat trees. Choose", 100, 150);
+    text("between the cats Fia, Tellus & Stella", 100, 200);
+    text("and try to help the fat rat find home.", 100, 250);
+    text("Make the cat get through the ?levels.", 100, 350);
+    text("But look out for the cacutuses...", 100, 400);
 
-    fill(255, 255, 255);
+    fill(255, 206, 253);
     textStyle(NORMAL);
     textSize(30);
-    text("How to play:", 90, 230);
+    text("How to play:", 690, 230);
 
-    triangle(90, 285, 110, 295, 110, 275);
-    triangle(210, 275, 210, 295, 230, 285);
-    rect(125, 320, 70, 15);
+    triangle(750, 275, 770, 285, 770, 265);
+    triangle(800, 265, 800, 285, 820, 275);
+    rect(750, 300, 70, 15);
     textSize(20);
-    text("Use the left and right", 90, 400);
-    text("arrows to stear.", 90, 420);
-    text("And spacebar to jump", 90, 440);
+    text("Use the left and right", 700, 350);
+    text("arrows to stear.", 700, 390);
+    text("And spacebar to jump", 700, 430);
     pop();
 
     characterButton(400, 450, 200, 70);
+    sittingStella(80, 430);
+    fish(150, 524);
+    sittingFia(730, 430);
+    mouse(790, 585);
+    cactus(0, 410, 0.5);
+    cactus(90, 510, 0.3);
 
     if (
       mouseIsPressed &&
