@@ -894,8 +894,8 @@ window.draw = () => {
     text("the jungle of cat trees. Choose", 100, 150);
     text("between the cats Fia, Tellus & Stella", 100, 200);
     text("and try to help the fat rat find home.", 100, 250);
-    text("Make the cat get through the ?levels.", 100, 350);
-    text("But look out for the cacutuses...", 100, 400);
+    text("Make the cat get through the three levels.", 100, 350);
+    text("But look out for the cactuses...", 100, 400);
 
     fill(255, 206, 253);
     textStyle(NORMAL);
@@ -907,8 +907,8 @@ window.draw = () => {
     rect(750, 300, 70, 15);
     textSize(20);
     text("Use the left and right", 700, 350);
-    text("arrows to stear.", 700, 390);
-    text("And spacebar to jump", 700, 430);
+    text("arrows to stear", 700, 390);
+    text("and spacebar to jump", 700, 430);
     pop();
 
     characterButton(400, 450, 200, 70);
